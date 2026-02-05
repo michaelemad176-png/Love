@@ -35,10 +35,7 @@ body{
 .message{
     font-size:24px;
     margin:25px 0;
-    color:#800040;
-    opacity:0;
-    transform: translateY(30px);
-    transition:1s;
+    color:#ff0066; /* لون واضح */
     white-space: pre-line;
 }
 
@@ -129,7 +126,8 @@ button{
     gap:15px;
     overflow-x:auto;
     padding:10px 0;
-    justify-content:center;
+    justify-content:flex-start;
+    flex-direction: row-reverse; /* ترتيب من اليمين للشمال */
 }
 
 .shape{
@@ -168,10 +166,10 @@ for(let i=0;i<35;i++){
 
     <h2>ادخلي تاريخ ميلادك ❤️</h2>
 
-    <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
-        <input type="number" id="day" placeholder="اليوم" style="width:80px;">
-        <input type="number" id="month" placeholder="الشهر" style="width:80px;">
-        <input type="number" id="year" placeholder="السنة" style="width:100px;">
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px; align-items:center;">
+        <input type="number" id="day" placeholder="اليوم" style="width:120px;">
+        <input type="number" id="month" placeholder="الشهر" style="width:120px;">
+        <input type="number" id="year" placeholder="السنة" style="width:120px;">
     </div>
 
     <button onclick="checkPassword()">افتحي</button>
@@ -268,12 +266,14 @@ function typeExtraMessages(){
     let index = 0;
 
     function typeNext(){
-        if(index>=extraTexts.length) return;
+        if(index >= extraTexts.length) return;
         let p = document.createElement("p");
         p.className = "message neon";
         container.appendChild(p);
+
         let text = extraTexts[index];
         let i=0;
+        p.style.opacity = 1; // للتأكد من الظهور
         let interval = setInterval(()=>{
             p.textContent += text.charAt(i);
             i++;
