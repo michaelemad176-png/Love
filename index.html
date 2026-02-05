@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love ❤️</title>
-
+<title>رسالة حب ❤️</title>
 <style>
 body{
     margin:0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(45deg,#000000,#1a001a);
-    color:white;
-    text-align:center;
+    font-family:'Arial', sans-serif;
+    background:#ffe6f0;
     overflow-x:hidden;
+    text-align:center;
+    color:white;
 }
 
-/* قلوب بتتحرك */
+/* قلوب متحركة */
 .heart{
     position: fixed;
-    color: red;
-    animation: float 6s linear infinite;
+    color:pink;
     font-size:20px;
+    animation: float 6s linear infinite;
 }
 @keyframes float{
-    0%{transform:translateY(100vh);}
-    100%{transform:translateY(-10vh);}
+    0%{transform:translateY(100vh) rotate(0deg);}
+    100%{transform:translateY(-10vh) rotate(360deg);}
 }
 
 .container{
@@ -34,14 +33,18 @@ body{
 
 h1{
     font-size:32px;
-    color:pink;
-    text-shadow:0 0 15px red;
+    color:#ff0066;
+    text-shadow:0 0 10px #ff99cc;
 }
 
 .message{
     font-size:22px;
     margin:25px 0;
     line-height:1.8;
+    color:#800040;
+    opacity:0;
+    transform: translateY(30px);
+    transition: all 1s ease;
 }
 
 .gallery{
@@ -49,27 +52,27 @@ h1{
     flex-direction:column;
     gap:15px;
     align-items:center;
+    margin-top:20px;
 }
 
 .gallery img{
     width:85%;
     border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,0,0.5);
-    transition:0.4s;
-}
-.gallery img:hover{
-    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(255,0,102,0.5);
+    transition: transform 1s ease, opacity 1s ease;
+    opacity:0;
+    transform: scale(0.8);
 }
 
 button{
     padding:15px 30px;
     font-size:18px;
-    background:linear-gradient(45deg,red,pink);
+    background:linear-gradient(45deg,#ff3399,#ff66cc);
     border:none;
     border-radius:15px;
     color:white;
     cursor:pointer;
-    box-shadow:0 0 15px red;
+    box-shadow:0 0 15px #ff66cc;
 }
 
 input{
@@ -81,40 +84,37 @@ input{
 }
 </style>
 </head>
-
 <body>
 
 <!-- قلوب -->
 <script>
-for(let i=0;i<25;i++){
+for(let i=0;i<35;i++){
     let heart=document.createElement("div");
     heart.className="heart";
     heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*20)+"px";
     heart.innerHTML="❤️";
     document.body.appendChild(heart);
 }
 </script>
 
 <div class="container" id="login">
-    <h1>اكتبي الرقم السري ❤️</h1>
+    <h1>ادخلي الرقم السري ❤️</h1>
     <input type="password" id="password" placeholder="الرقم السري">
     <br>
     <button onclick="checkPassword()">افتحي الرسالة</button>
 </div>
 
 <div class="container" id="content" style="display:none;">
-    <h1>رسالة لي قلب حياتي ❤️</h1>
-
-    <p class="message">
+    <h1>رسالة لحبيبتي ❤️</h1>
+    <p class="message" id="msg">
         بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨
     </p>
-
     <div class="gallery">
         <img src="jpg1">
         <img src="jpg2">
         <img src="jpg3">
     </div>
-
     <audio id="song" autoplay>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
@@ -127,6 +127,20 @@ function checkPassword(){
         document.getElementById("login").style.display="none";
         document.getElementById("content").style.display="block";
         document.getElementById("song").play();
+
+        // ظهور الرسالة بتأثير fade-in
+        let msg = document.getElementById("msg");
+        setTimeout(()=>{msg.style.opacity=1; msg.style.transform='translateY(0)';}, 200);
+
+        // ظهور الصور واحدة واحدة
+        let imgs = document.querySelectorAll(".gallery img");
+        imgs.forEach((img,i)=>{
+            setTimeout(()=>{
+                img.style.opacity=1;
+                img.style.transform='scale(1)';
+            }, 800 + i*600);
+        });
+
     }else{
         alert("الرقم السري غلط 😢");
     }
