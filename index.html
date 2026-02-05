@@ -2,79 +2,133 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>رسالة حب ليها ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: black;
-    color: white;
-    text-align: center;
+body{
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg,#000000,#1a001a);
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
 }
-.container { margin-top: 100px; padding: 20px; }
-h1 { font-size: 32px; color: pink; }
-.message { font-size: 20px; margin: 20px 0; }
-.gallery img {
-    width: 90%;
-    margin: 10px 0;
-    border-radius: 15px;
+
+/* قلوب بتتحرك */
+.heart{
+    position: fixed;
+    color: red;
+    animation: float 6s linear infinite;
+    font-size:20px;
 }
-button {
-    padding: 12px 25px;
-    font-size: 18px;
-    background: red;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
 }
-input {
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 20px;
+
+.container{
+    margin-top:80px;
+    padding:20px;
+}
+
+h1{
+    font-size:32px;
+    color:pink;
+    text-shadow:0 0 15px red;
+}
+
+.message{
+    font-size:22px;
+    margin:25px 0;
+    line-height:1.8;
+}
+
+.gallery{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    align-items:center;
+}
+
+.gallery img{
+    width:85%;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,0,0,0.5);
+    transition:0.4s;
+}
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    background:linear-gradient(45deg,red,pink);
+    border:none;
+    border-radius:15px;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 15px red;
+}
+
+input{
+    padding:12px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    margin-bottom:15px;
 }
 </style>
 </head>
+
 <body>
+
+<!-- قلوب -->
+<script>
+for(let i=0;i<25;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.innerHTML="❤️";
+    document.body.appendChild(heart);
+}
+</script>
 
 <div class="container" id="login">
     <h1>اكتبي الرقم السري ❤️</h1>
     <input type="password" id="password" placeholder="الرقم السري">
-    <br><br>
+    <br>
     <button onclick="checkPassword()">افتحي الرسالة</button>
 </div>
 
 <div class="container" id="content" style="display:none;">
     <h1>رسالة لي قلب حياتي ❤️</h1>
+
     <p class="message">
-        بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي🫂♥️✨
+        بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨
     </p>
 
     <div class="gallery">
-        <img src="1.jpg" alt="صورة 1">
-        <img src="2.jpg" alt="صورة 2">
-        <img src="3.jpg" alt="صورة 3">
+        <img src="1.jpg">
+        <img src="2.jpg">
+        <img src="3.jpg">
     </div>
 
-    <!-- أغنية حب كل حياتي -->
-    <audio id="song" controls autoplay>
+    <audio id="song" autoplay>
         <source src="song.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>  
+    </audio>
 </div>
 
 <script>
-function checkPassword() {
-    var pw = document.getElementById("password").value;
-    var secret = "4112002"; // الرقم السري
-    if (pw === secret) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("content").style.display = "block";
+function checkPassword(){
+    var pw=document.getElementById("password").value;
+    if(pw==="4112002"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("content").style.display="block";
         document.getElementById("song").play();
-    } else {
-        alert("الرقم السري غلط! حاول تاني 😢");
+    }else{
+        alert("الرقم السري غلط 😢");
     }
 }
 </script>
