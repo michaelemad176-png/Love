@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>رسالة حب ليها ❤️</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+}
+.container { margin-top: 100px; padding: 20px; }
+h1 { font-size: 32px; color: pink; }
+.message { font-size: 20px; margin: 20px 0; }
+.gallery img {
+    width: 90%;
+    margin: 10px 0;
+    border-radius: 15px;
+}
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    background: red;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+input {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="login">
+    <h1>اكتبي الرقم السري ❤️</h1>
+    <input type="password" id="password" placeholder="الرقم السري">
+    <br><br>
+    <button onclick="checkPassword()">افتحي الرسالة</button>
+</div>
+
+<div class="container" id="content" style="display:none;">
+    <h1>رسالة لي قلب حياتي ❤️</h1>
+    <p class="message">
+        بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي🫂♥️✨
+    </p>
+
+    <div class="gallery">
+        <img src="1.jpg" alt="صورة 1">
+        <img src="2.jpg" alt="صورة 2">
+        <img src="3.jpg" alt="صورة 3">
+    </div>
+
+    <!-- أغنية حب كل حياتي -->
+    <audio id="song" controls autoplay>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>  
+</div>
+
+<script>
+function checkPassword() {
+    var pw = document.getElementById("password").value;
+    var secret = "4112002"; // الرقم السري
+    if (pw === secret) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        document.getElementById("song").play();
+    } else {
+        alert("الرقم السري غلط! حاول تاني 😢");
+    }
+}
+</script>
+
+</body>
+</html>
