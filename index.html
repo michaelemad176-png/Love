@@ -3,309 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>رسالة حب ❤️</title>
+<title>Tota & Moka ❤️</title>
 <style>
-body{
-    margin:0;
-    font-family:'Arial', sans-serif;
-    background:#ffe6f0;
-    overflow-x:hidden;
-    text-align:center;
-    perspective:1000px; /* Parallax perspective */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    background-color: #ffe6f0;
+    text-align: center;
+    color: #fff;
+    position: relative;
 }
 
-/* حركة الأشكال والخلفية */
-.heart{
+/* الخلفية الثابتة بأيقونات حب */
+body::before {
+    content: "";
     position: fixed;
-    pointer-events:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+    background-image: url('background-pattern.png'); /* ضع صورة أيقونات الحب هنا */
+    background-repeat: repeat;
+    background-size: 50px;
+}
+
+/* القلوب المتوهجة المتحركة */
+.heart {
+    position: fixed;
+    pointer-events: none;
     animation: floatUp linear infinite;
     transform-origin: center;
+    z-index: -1;
 }
-
 @keyframes floatUp{
     0%{transform: translateY(100vh) translateX(0) rotate(0deg);}
     50%{transform: translateY(50vh) translateX(15px) rotate(180deg);}
     100%{transform: translateY(-50vh) translateX(-10px) rotate(360deg);}
 }
 
-.container{
-    margin-top:70px;
-    padding:20px;
+/* النص الرئيسي */
+#main-text {
+    font-size: 28px;
+    color: #ff0066;
+    margin-top: 50px;
 }
 
-.message{
-    font-size:28px;
-    margin:25px 0;
-    color:#ff0066; /* واضح جدًا */
-    white-space: pre-line;
-    transition: all 0.5s ease;
+/* خانات الباسوورد */
+.password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
 }
 
-/* صور وبطاقات */
-.gallery img{
-    width:85%;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    margin-bottom:15px;
-    opacity:0;
-    transform:scale(0.8);
-    transition: transform 0.5s, opacity 0.5s;
+.password-container input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #ff8fc0;
+    text-align: center;
 }
 
-.gallery img:hover{
-    transform: scale(1.05) rotate(-2deg);
+.password-container button {
+    padding: 12px 20px;
+    margin-top: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff3399;
+    color: white;
+    cursor: pointer;
 }
 
-.cards{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-    margin-top:30px;
-}
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:15px;
-    box-shadow:0 0 20px rgba(255,0,102,0.4);
-    opacity:0;
-    transform: translateY(30px) scale(0.9);
-    transition: transform 0.5s, opacity 0.5s;
-}
-
-.card:hover{
-    transform: translateY(-5px) scale(1.05);
-}
-
-.card img{
-    width:100%;
-    border-radius:15px;
-}
-
-.card p{
-    margin-top:10px;
-    font-size:20px;
-    color:#ff0066;
-    font-weight:bold;
-}
-
-input,button{
-    padding:12px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-}
-
-button{
-    background:#ff3399;
-    color:white;
-    margin-top:10px;
-}
-
-#error-msg{
-    color:red;
-    margin-top:10px;
-    display:none;
+#error-msg {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+    display: none;
 }
 
 /* الأشكال التفاعلية */
-.shape-section{
-    margin-top:40px;
+.shapes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
 }
 
-.shapes-container{
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    padding:10px 0;
-    justify-content:center;
-    flex-direction: row;
-    transition: transform 0.3s;
+.shape {
+    font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-.shape{
-    font-size:40px;
-    cursor:pointer;
-    transition: transform 0.3s;
+.shape:hover {
+    transform: scale(1.3) rotate(10deg);
 }
 
-.shape:hover{
-    transform:scale(1.3) rotate(15deg);
+/* البطاقات والصور */
+.card {
+    width: 250px;
+    margin: 50px auto;
+    text-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    transform: translateZ(0);
+    transition: transform 0.5s;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #ff0066;
+    font-weight: bold;
+}
+
+/* Parallax */
+.parallax {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* رسالة الأشكال */
+#shape-message {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255,0,102,0.5);
+    font-size: 18px;
+    color: #ff0066;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
 }
 </style>
 </head>
 <body>
 
 <script>
-// الخلفية: أشكال رومانسية متوهجة مع Parallax effect
+// إنشاء القلوب المتوهجة المتحركة
 let shapes = ["❤️","💕","💖","✨","🌸","🫂","🌹"];
 let colors = ["#ff6699","#ff3399","#ff99cc","#ffccff","#ffb3d9"];
-
-for(let i=0;i<50;i++){
-    let shape = document.createElement("div");
-    shape.className = "heart";
-    shape.style.left = Math.random()*100+"vw";
-    shape.style.fontSize = (15+Math.random()*25)+"px";
-    shape.style.color = colors[Math.floor(Math.random()*colors.length)];
+for(let i=0;i<40;i++){
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.fontSize = (15+Math.random()*25)+"px";
+    heart.style.color = colors[Math.floor(Math.random()*colors.length)];
     let duration = (4+Math.random()*5)+"s";
-    shape.style.animationDuration = duration;
-    shape.style.opacity = Math.random()*0.8 + 0.3;
-    shape.innerHTML = shapes[Math.floor(Math.random()*shapes.length)];
-    // Depth effect: سرعة مختلفة حسب الحجم
-    shape.style.animationTimingFunction = "linear";
-    document.body.appendChild(shape);
+    heart.style.animationDuration = duration;
+    heart.style.opacity = Math.random()*0.7+0.3;
+    heart.innerHTML = shapes[Math.floor(Math.random()*shapes.length)];
+    document.body.appendChild(heart);
 }
 </script>
 
-<!-- صفحة الرقم السري -->
-<div class="container" id="login">
-    <h2 style="font-size:26px; margin-bottom:15px;">
-        Tota&Moka Forever 🔐♥️🫂
-    </h2>
+<!-- النص الرئيسي -->
+<div id="main-text">Tota & Moka Forever 🔐♥️🫂</div>
 
-    <h2>ادخلي تاريخ ميلادك ❤️</h2>
-
-    <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px; align-items:center;">
-        <input type="number" id="day" placeholder="اليوم" style="width:120px;">
-        <input type="number" id="month" placeholder="الشهر" style="width:120px;">
-        <input type="number" id="year" placeholder="السنة" style="width:120px;">
-    </div>
-
-    <button onclick="checkPassword()">افتحي</button>
+<!-- خانات الباسوورد -->
+<div class="password-container" id="login">
+    <input type="number" id="day" placeholder="اليوم">
+    <input type="number" id="month" placeholder="الشهر">
+    <input type="number" id="year" placeholder="السنة">
+    <button onclick="checkPassword()">افتحي الموقع</button>
     <p id="error-msg"></p>
 </div>
 
-<!-- المحتوى -->
-<div class="container" id="content" style="display:none;">
-
-    <p class="message" id="msg">
-        بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨
-    </p>
-
-    <div id="extra-messages" style="margin-top:20px;"></div>
+<!-- المحتوى بعد الباسورد -->
+<div id="content" style="display:none;">
 
     <!-- الأشكال التفاعلية -->
-    <div class="shape-section">
-        <p style="font-size:20px; color:#ff0066; margin-bottom:10px;">
-            أضغطي بصوابعك الحلوين دول عالاشكال دى ♥️👇
-        </p>
-        <div class="shapes-container">
-            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">💖</div>
-            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🌸</div>
-            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">✨</div>
-            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🌈</div>
-        </div>
+    <div class="shapes">
+        <div class="shape" onclick="showMessage('💖 أنتِ قلبي 💖')">💖</div>
+        <div class="shape" onclick="showMessage('🌹 حبيبتي 🌹')">🌹</div>
+        <div class="shape" onclick="showMessage('🫂 أحلى عناق 🫂')">🫂</div>
+        <div class="shape" onclick="showMessage('✨ نجمة حياتي ✨')">✨</div>
     </div>
 
-    <div id="shape-message" style="
-        position:fixed; top:30%; left:50%; transform:translateX(-50%);
-        background:white; padding:15px 25px; border-radius:20px;
-        box-shadow:0 0 20px rgba(255,0,102,0.5);
-        font-size:18px; color:#ff0066;
-        opacity:0; pointer-events:none; transition:0.5s;
-    "></div>
-
-    <div class="gallery">
-        <img src="jpg1.jpg">
-        <img src="jpg2.jpg">
-        <img src="jpg3.jpg">
+    <!-- بطاقات الصور -->
+    <div class="card parallax">
+        <img src="5.jpg" alt="تاريخ ميلاد القمر">
+        <p>تاريخ ميلاد القمر</p>
     </div>
 
-    <div class="cards">
-        <div class="card">
-            <img src="5.jpg">
-            <p>تاريخ ميلاد القمر</p>
-        </div>
-
-        <div class="card">
-            <img src="6.png">
-            <p>أكتر حاجة بتحبها توتا</p>
-        </div>
-
-        <div class="card">
-            <img src="jpg1.jpg">
-            <p>أجمل صورة ليكي ❤️</p>
-        </div>
+    <div class="card parallax">
+        <img src="6.png" alt="أكتر حاجة بتحبها توتا">
+        <p>أكتر حاجة بتحبها توتا</p>
     </div>
 
+    <div class="card parallax">
+        <img src="jpg1.jpg" alt="أجمل صورة ليكي">
+        <p>أجمل صورة ليكي ❤️</p>
+    </div>
+
+    <div id="shape-message"></div>
+
+    <!-- الموسيقى -->
     <audio id="song" autoplay>
         <source src="leo.mp3" type="audio/mpeg">
     </audio>
 </div>
 
 <script>
-// Typing effect الرسالة الرئيسية
-function typeMessage(element, text, speed=50, callback){
-    let i=0;
-    element.textContent="";
-    element.style.opacity=1;
-    let interval = setInterval(()=>{
-        element.textContent += text.charAt(i);
-        i++;
-        if(i>=text.length){
-            clearInterval(interval);
-            if(callback) callback();
-        }
-    },speed);
-}
-
-// Typing effect للرسائل الإضافية
-let extraTexts = [
-    "أنتِ كل حياتي، وبدونك ما ليش معنى 💖🌙✨",
-    "كل لحظة معاكِ أحلى من ألف لحظة 💕🫂",
-    "قلبي ملكك وحدك، وعيوني ما تشوف غيرك ♥️🌸",
-    "أنتِ سبب ابتسامتي وسعادتي الدائمة 🌹💖",
-    "بحبك فوق ما الكلمات تقدر تعبر، كل يوم أكتر ♥️✨",
-    "معاكِ الدنيا أجمل وألوانها أزهى 🌈🫂",
-    "كل ثانية معاكِ كنز مايتعوضش 💕💫"
-];
-
-function typeExtraMessages(){
-    let container = document.getElementById("extra-messages");
-    let index = 0;
-
-    function typeNext(){
-        if(index >= extraTexts.length) return;
-        let p = document.createElement("p");
-        p.className = "message";
-        container.appendChild(p);
-
-        let text = extraTexts[index];
-        let i=0;
-        p.style.opacity = 1;
-        let interval = setInterval(()=>{
-            p.textContent += text.charAt(i);
-            i++;
-            if(i>=text.length){
-                clearInterval(interval);
-                index++;
-                setTimeout(typeNext,500);
-            }
-        },50);
-    }
-
-    typeNext();
-}
-
-// Animation الصور والبطاقات
-function animateCards(){
-    let imgs=document.querySelectorAll(".gallery img");
-    imgs.forEach((img,i)=>{
-        setTimeout(()=>{
-            img.style.opacity=1;
-            img.style.transform='scale(1)';
-        }, i*600);
-    });
-
-    let cards=document.querySelectorAll(".card");
-    cards.forEach((card,i)=>{
-        setTimeout(()=>{
-            card.style.opacity=1;
-            card.style.transform='translateY(0) scale(1)';
-        }, imgs.length*600 + i*600);
-    });
-}
-
 // الرسائل عند الضغط على الأشكال
 function showMessage(msg){
     let box = document.getElementById("shape-message");
@@ -313,12 +226,11 @@ function showMessage(msg){
     box.style.opacity = 1;
     box.style.pointerEvents = 'auto';
     box.style.transform = 'translateX(-50%) scale(1.1)';
-    
     setTimeout(()=>{
         box.style.opacity = 0;
         box.style.pointerEvents = 'none';
         box.style.transform = 'translateX(-50%) scale(1)';
-    }, 3000); // 3 ثواني
+    }, 3000);
 }
 
 // تحقق تاريخ الميلاد
@@ -330,42 +242,34 @@ function checkPassword(){
 
     if(day=="4" && month=="11" && year=="2002"){
         document.getElementById("login").style.display="none";
-
         let temp=document.createElement("div");
-        temp.innerHTML="♥️شطورة حبيبة بابا♥️";
+        temp.innerHTML="♥️ شطورة حبيبة بابا ♥️";
         temp.style.fontSize="30px";
         temp.style.color="#ff0066";
         temp.style.marginTop="50px";
         temp.style.opacity="0";
         temp.style.transition="opacity 0.5s";
         document.body.appendChild(temp);
-
         setTimeout(()=>{ temp.style.opacity=1; },100);
-
         setTimeout(()=>{
             temp.style.opacity=0;
-            setTimeout(()=>{
-                temp.remove();
-                document.getElementById("content").style.display="block";
-                document.getElementById("song").play();
-
-                // الرسالة الرئيسية
-                typeMessage(document.getElementById("msg"),
-                "بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨",
-                50,
-                ()=>{
-                    typeExtraMessages();
-                    animateCards();
-                });
-
-            },500);
+            setTimeout(()=>{ temp.remove(); document.getElementById("content").style.display="block"; },500);
         },2000);
-
-    }else{
+    } else {
         error.innerHTML="الرقم غلط يا بقرة 🤌😂";
         error.style.display="block";
     }
 }
+
+// Parallax عند التمرير
+window.addEventListener('scroll', function() {
+    const cards = document.querySelectorAll('.parallax');
+    const scrollY = window.scrollY;
+    cards.forEach((card, index) => {
+        const speed = (index + 1) * 0.3;
+        card.style.transform = `translateY(${scrollY * speed}px)`;
+    });
+});
 </script>
 
 </body>
