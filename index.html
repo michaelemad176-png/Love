@@ -11,7 +11,6 @@ body{
     background:#ffe6f0;
     overflow-x:hidden;
     text-align:center;
-    color:white;
 }
 
 /* قلوب متحركة */
@@ -27,122 +26,180 @@ body{
 }
 
 .container{
-    margin-top:80px;
+    margin-top:70px;
     padding:20px;
 }
 
-h1{
-    font-size:32px;
-    color:#ff0066;
-    text-shadow:0 0 10px #ff99cc;
-}
-
 .message{
-    font-size:22px;
+    font-size:24px;
     margin:25px 0;
-    line-height:1.8;
     color:#800040;
     opacity:0;
     transform: translateY(30px);
-    transition: all 1s ease;
-}
-
-.gallery{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    align-items:center;
-    margin-top:20px;
+    transition:1s;
 }
 
 .gallery img{
     width:85%;
     border-radius:20px;
     box-shadow:0 0 20px rgba(255,0,102,0.5);
-    transition: transform 1s ease, opacity 1s ease;
+    margin-bottom:15px;
     opacity:0;
-    transform: scale(0.8);
+    transform:scale(0.8);
+    transition:1s;
 }
 
-button{
-    padding:15px 30px;
-    font-size:18px;
-    background:linear-gradient(45deg,#ff3399,#ff66cc);
-    border:none;
+/* البطاقات الجديدة */
+.cards{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:15px;
+    box-shadow:0 0 20px rgba(255,0,102,0.4);
+}
+
+.card img{
+    width:100%;
     border-radius:15px;
-    color:white;
-    cursor:pointer;
-    box-shadow:0 0 15px #ff66cc;
 }
 
-input{
+.card p{
+    margin-top:10px;
+    font-size:20px;
+    color:#ff0066;
+    font-weight:bold;
+}
+
+input,button{
     padding:12px;
     font-size:18px;
     border-radius:10px;
     border:none;
-    margin-bottom:15px;
+}
+
+button{
+    background:#ff3399;
+    color:white;
+    margin-top:10px;
+}
+
+#error-msg{
+    color:red;
+    margin-top:10px;
+    display:none;
 }
 </style>
 </head>
 <body>
 
-<!-- قلوب -->
 <script>
 for(let i=0;i<35;i++){
     let heart=document.createElement("div");
     heart.className="heart";
     heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(15+Math.random()*20)+"px";
     heart.innerHTML="❤️";
     document.body.appendChild(heart);
 }
 </script>
 
+<!-- صفحة الرقم السري -->
 <div class="container" id="login">
-    <h1>ادخلي الرقم السري ❤️</h1>
-    <input type="password" id="password" placeholder="الرقم السري">
-    <br>
-    <button onclick="checkPassword()">افتحي الرسالة</button>
+    <h2>ادخلي الرقم السري ❤️</h2>
+    <input type="password" id="password" placeholder="الرقم السري"><br>
+    <button onclick="checkPassword()">افتحي</button>
+    <p id="error-msg"></p>
 </div>
 
+<!-- المحتوى -->
 <div class="container" id="content" style="display:none;">
-    <h1>رسالة لحبيبتي ❤️</h1>
+
     <p class="message" id="msg">
         بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨
     </p>
+
     <div class="gallery">
         <img src="jpg1.jpg">
         <img src="jpg2.jpg">
         <img src="jpg3.jpg">
     </div>
+
+    <!-- البطاقات -->
+    <div class="cards">
+        <div class="card">
+            <img src="5.jpg">
+            <p>تاريخ ميلاد القمر</p>
+        </div>
+
+        <div class="card">
+            <img src="6.png">
+            <p>أكتر حاجة بتحبها توتا</p>
+        </div>
+
+        <div class="card">
+            <img src="jpg1.jpg">
+            <p>أجمل صورة ليكي ❤️</p>
+        </div>
+    </div>
+
     <audio id="song" autoplay>
-        <source src="song.mp3" type="audio/mpeg">
+        <source src="leo.mp3" type="audio/mpeg">
     </audio>
 </div>
 
 <script>
 function checkPassword(){
     var pw=document.getElementById("password").value;
+    var error=document.getElementById("error-msg");
+
     if(pw==="4112002"){
         document.getElementById("login").style.display="none";
-        document.getElementById("content").style.display="block";
-        document.getElementById("song").play();
 
-        // ظهور الرسالة بتأثير fade-in
-        let msg = document.getElementById("msg");
-        setTimeout(()=>{msg.style.opacity=1; msg.style.transform='translateY(0)';}, 200);
+        let temp=document.createElement("div");
+        temp.innerHTML="♥️شطورة حبيبة بابا♥️";
+        temp.style.fontSize="30px";
+        temp.style.color="#ff0066";
+        temp.style.marginTop="50px";
+        temp.style.opacity="0";
+        temp.style.transition="opacity 0.5s";
+        document.body.appendChild(temp);
 
-        // ظهور الصور واحدة واحدة
-        let imgs = document.querySelectorAll(".gallery img");
-        imgs.forEach((img,i)=>{
+        setTimeout(()=>{
+            temp.style.opacity=1;
+        },100);
+
+        setTimeout(()=>{
+            temp.style.opacity=0;
             setTimeout(()=>{
-                img.style.opacity=1;
-                img.style.transform='scale(1)';
-            }, 800 + i*600);
-        });
+                temp.remove();
+                document.getElementById("content").style.display="block";
+                document.getElementById("song").play();
+
+                // ظهور الرسالة الأساسية
+                let msg=document.getElementById("msg");
+                msg.style.opacity=1;
+                msg.style.transform='translateY(0)';
+
+                // ظهور الصور تدريجياً
+                let imgs=document.querySelectorAll(".gallery img");
+                imgs.forEach((img,i)=>{
+                    setTimeout(()=>{
+                        img.style.opacity=1;
+                        img.style.transform='scale(1)';
+                    }, i*600);
+                });
+
+            },500);
+        },2000);
 
     }else{
-        alert("الرقم السري غلط يابقرة 😢");
+        error.innerHTML="الرقم غلط يا بقرة 🤌😂";
+        error.style.display="block";
     }
 }
 </script>
