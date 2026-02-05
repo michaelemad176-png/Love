@@ -13,18 +13,18 @@ body{
     text-align:center;
 }
 
-/* قلوب متحركة */
+/* حركة الأشكال والخلفية */
 .heart{
     position: fixed;
     pointer-events:none;
-    width: 25px;
     animation: floatUp linear infinite;
     transform-origin: center;
 }
+
 @keyframes floatUp{
-    0%{transform: translateY(0) translateX(0) rotate(0deg);}
-    50%{transform: translateY(-60vh) translateX(15px) rotate(180deg);}
-    100%{transform: translateY(-120vh) translateX(-10px) rotate(360deg);}
+    0%{transform: translateY(100vh) translateX(0) rotate(0deg);}
+    50%{transform: translateY(50vh) translateX(15px) rotate(180deg);}
+    100%{transform: translateY(-50vh) translateX(-10px) rotate(360deg);}
 }
 
 .container{
@@ -33,23 +33,10 @@ body{
 }
 
 .message{
-    font-size:24px;
+    font-size:28px;
     margin:25px 0;
-    color:#ff0066; /* لون واضح */
+    color:#ff0066; /* واضح جدًا */
     white-space: pre-line;
-}
-
-/* Neon glow effect */
-.neon {
-    background: linear-gradient(45deg, #ff3399, #ff66cc, #ff99cc, #ff3399);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glow 3s linear infinite;
-}
-@keyframes glow {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
 }
 
 /* صور وبطاقات */
@@ -126,8 +113,8 @@ button{
     gap:15px;
     overflow-x:auto;
     padding:10px 0;
-    justify-content:flex-start;
-    flex-direction: row-reverse; /* ترتيب من اليمين للشمال */
+    justify-content:center; /* محاذاة في وسط الصفحة */
+    flex-direction: row;
 }
 
 .shape{
@@ -144,23 +131,26 @@ button{
 <body>
 
 <script>
-// القلوب الملونة
-let colors=["#ff6699","#ff3399","#ff99cc"];
-for(let i=0;i<35;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(15+Math.random()*20)+"px";
-    heart.style.color=colors[Math.floor(Math.random()*colors.length)];
-    heart.style.animationDuration=(4+Math.random()*4)+"s";
-    heart.innerHTML="❤️";
-    document.body.appendChild(heart);
+// الخلفية: أشكال رومانسية متوهجة
+let shapes = ["❤️","💕","💖","✨","🌸","🫂","🌹"];
+let colors = ["#ff6699","#ff3399","#ff99cc","#ffccff","#ffb3d9"];
+
+for(let i=0;i<50;i++){
+    let shape = document.createElement("div");
+    shape.className = "heart";
+    shape.style.left = Math.random()*100+"vw";
+    shape.style.fontSize = (15+Math.random()*25)+"px";
+    shape.style.color = colors[Math.floor(Math.random()*colors.length)];
+    shape.style.animationDuration = (4+Math.random()*5)+"s";
+    shape.style.opacity = Math.random()*0.8 + 0.3;
+    shape.innerHTML = shapes[Math.floor(Math.random()*shapes.length)];
+    document.body.appendChild(shape);
 }
 </script>
 
 <!-- صفحة الرقم السري -->
 <div class="container" id="login">
-    <h2 class="neon" style="font-size:26px; margin-bottom:15px; text-shadow:0 0 10px #ff99cc;">
+    <h2 style="font-size:26px; margin-bottom:15px;">
         Tota&Moka Forever 🔐♥️🫂
     </h2>
 
@@ -179,7 +169,7 @@ for(let i=0;i<35;i++){
 <!-- المحتوى -->
 <div class="container" id="content" style="display:none;">
 
-    <p class="message neon" id="msg">
+    <p class="message" id="msg">
         بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨
     </p>
 
@@ -268,12 +258,12 @@ function typeExtraMessages(){
     function typeNext(){
         if(index >= extraTexts.length) return;
         let p = document.createElement("p");
-        p.className = "message neon";
+        p.className = "message";
         container.appendChild(p);
 
         let text = extraTexts[index];
         let i=0;
-        p.style.opacity = 1; // للتأكد من الظهور
+        p.style.opacity = 1;
         let interval = setInterval(()=>{
             p.textContent += text.charAt(i);
             i++;
@@ -319,7 +309,7 @@ function showMessage(msg){
         box.style.opacity = 0;
         box.style.pointerEvents = 'none';
         box.style.transform = 'translateX(-50%) scale(1)';
-    }, 2500);
+    }, 3000); // 3 ثواني
 }
 
 // تحقق تاريخ الميلاد
