@@ -87,26 +87,6 @@ body::before{
     display:none;
 }
 
-/* أيقونة الإعدادات */
-#settings-btn{
-    font-size:45px;
-    top:20px;
-    right:20px;
-    background:white;
-    padding:10px;
-    border-radius:50%;
-    box-shadow:0 4px 15px rgba(0,0,0,0.2);
-    cursor:pointer;
-    transition:0.3s;
-    position:fixed;
-    display:none;
-    z-index:10;
-}
-#settings-btn:hover{
-    transform: rotate(20deg) scale(1.2);
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
-}
-
 /* الأشكال التفاعلية */
 .shape-section{
     margin-top:40px;
@@ -191,7 +171,7 @@ for(let i=0;i<100;i++){
     let heart=document.createElement("div");
     heart.className="heart";
     heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(5+Math.random()*10)+"px"; // صغرنا 20 مرة
+    heart.style.fontSize=(5+Math.random()*10)+"px";
     heart.style.color=colors[Math.floor(Math.random()*colors.length)];
     heart.style.animationDuration=(4+Math.random()*5)+"s";
     heart.style.opacity=Math.random()*0.8+0.3;
@@ -215,9 +195,6 @@ for(let i=0;i<100;i++){
     </div>
     <p id="error-msg"></p>
 </div>
-
-<!-- أيقونة الإعدادات -->
-<div id="settings-btn" onclick="openSettings()">⚙️</div>
 
 <!-- المحتوى -->
 <div class="container" id="content" style="display:none;">
@@ -259,7 +236,7 @@ for(let i=0;i<100;i++){
         </div>
     </div>
 
-    <audio id="song" autoplay>
+    <audio id="song">
         <source src="leo.mp3" type="audio/mpeg">
     </audio>
 </div>
@@ -306,27 +283,40 @@ function checkPassword(){
 
     if(day=="4" && month=="11" && year=="2002"){
         document.getElementById("login").style.display="none";
-        document.getElementById("content").style.display="block";
 
-        // اظهار النص الرئيسي
-        let mainText = "أنتِ كل حياتي، وبدونك ما ليش معنى 💖🌙✨\nكل لحظة معاكِ أحلى من ألف لحظة 💕🫂\nقلبي ملكك وحدك، وعيوني ما تشوف غيرك ♥️🌸";
-        let mainTextEl = document.getElementById("main-text");
-        mainTextEl.textContent = mainText;
-        mainTextEl.style.display = "block";
+        // اظهار الجملة مؤقتاً
+        let temp=document.createElement("div");
+        temp.innerHTML="♥️شطورة حبيبة بابا♥️";
+        temp.style.fontSize="30px";
+        temp.style.color="#ff0066";
+        temp.style.marginTop="50px";
+        temp.style.opacity="0";
+        temp.style.transition="opacity 0.5s";
+        document.body.appendChild(temp);
+        setTimeout(()=>{ temp.style.opacity=1; },100);
 
-        // اظهار أيقونة الإعدادات
-        document.getElementById("settings-btn").style.display = "block";
+        setTimeout(()=>{
+            temp.style.opacity=0;
+            setTimeout(()=>{
+                temp.remove();
+                // اظهار المحتوى
+                document.getElementById("content").style.display="block";
+                document.getElementById("song").play();
 
-        animateCards();
+                // اظهار النص الرئيسي
+                let mainText = "أنتِ كل حياتي، وبدونك ما ليش معنى 💖🌙✨\nكل لحظة معاكِ أحلى من ألف لحظة 💕🫂\nقلبي ملكك وحدك، وعيوني ما تشوف غيرك ♥️🌸";
+                let mainTextEl = document.getElementById("main-text");
+                mainTextEl.textContent = mainText;
+                mainTextEl.style.display = "block";
+
+                animateCards();
+            },500);
+        },2000);
+
     } else {
         error.innerHTML="الرقم غلط يا بقرة 🤌😂";
         error.style.display="block";
     }
-}
-
-// فتح الإعدادات (Placeholder)
-function openSettings(){
-    alert("هنا تظهر نافذة الإعدادات لتعديل النصوص، الأيقونات والخلفية!");
 }
 </script>
 
