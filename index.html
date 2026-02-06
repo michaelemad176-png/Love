@@ -29,7 +29,7 @@ body{
     position:fixed;
     top:60px;
     right:15px;
-    width:260px;
+    width:280px;
     background:#fff;
     padding:15px;
     border-radius:15px;
@@ -37,11 +37,23 @@ body{
     display:none;
     z-index:9999;
     text-align:right;
+    font-size:14px;
+}
+#settingsPanel label{
+    display:block;
+    margin-top:8px;
 }
 #settingsPanel input,
-#settingsPanel textarea{
+#settingsPanel textarea,
+#settingsPanel select{
     width:100%;
-    margin:6px 0 12px;
+    margin:4px 0 10px;
+}
+
+/* النسبة المئوية */
+.rangeValue{
+    float:right;
+    margin-right:5px;
 }
 
 /* النص الرئيسي */
@@ -51,6 +63,7 @@ body{
     margin:40px 20px;
     font-weight:bold;
     line-height:1.6;
+    display:none;
 }
 
 /* القلوب */
@@ -110,6 +123,10 @@ button{
 .shape{
     font-size:40px;
     cursor:pointer;
+    border:2px solid #ff0066;
+    padding:10px;
+    border-radius:15px;
+    transition:0.3s;
 }
 
 /* رسالة الأشكال */
@@ -158,7 +175,6 @@ button{
 }
 </style>
 </head>
-
 <body>
 
 <!-- زر الإعدادات -->
@@ -168,34 +184,45 @@ button{
 <div id="settingsPanel">
 <h3>الإعدادات</h3>
 
-<label>لون النص</label>
-<input type="color" id="setTextColor">
+<label>لون النص <span id="textColorValue"></span></label>
+<input type="color" id="setTextColor" value="#ff0066">
 
-<label>حجم الخط</label>
-<input type="range" id="setFontSize" min="18" max="40">
+<label>حجم النص <span id="fontSizeValue">28</span> px</label>
+<input type="range" id="setFontSize" min="18" max="40" value="28">
 
-<label>عدد القلوب</label>
-<input type="range" id="setHearts" min="10" max="150">
+<label>عدد القلوب <span id="heartsValue">50</span></label>
+<input type="range" id="setHearts" min="10" max="150" value="50">
 
-<label>اسم الأغنية</label>
-<input type="text" id="setSong" placeholder="leo.mp3">
+<label>حجم الأيقونات <span id="iconSizeValue">40</span> px</label>
+<input type="range" id="setIconSize" min="20" max="100" value="40">
+
+<label>شكل الأيقونات (Emoji)</label>
+<input type="text" id="setIconEmoji" value="❤️">
+
+<label>سمك الفريم حول الأيقونات والبطاقات <span id="borderWidthValue">2</span> px</label>
+<input type="range" id="setBorderWidth" min="1" max="10" value="2">
+
+<label>لون الفريم</label>
+<input type="color" id="setBorderColor" value="#ff0066">
+
+<label>الخلفية (لون أو صورة URL)</label>
+<input type="text" id="setBackground" placeholder="مثال: #ffe6f0 أو url('bg.png')">
 
 <label>رسائل الأشكال (سطر لكل رسالة)</label>
-<textarea id="setShapes"></textarea>
+<textarea id="setShapes">أنتِ أحلى واحدة في الدنيا 🥰
+قلبي كله ملكك ❤️
+بحبك فوق ما تتخيلي 🫂
+كل يوم معاكِ أحلى 💕</textarea>
 
-<label>الباسورد الجديد</label>
-<input type="text" id="setPass" placeholder="4/11/2002">
+<label>الباسورد</label>
+<input type="text" id="setPass" value="4/11/2002">
 
 <button onclick="saveSettings()">حفظ</button>
 <button onclick="resetSettings()">Reset</button>
 </div>
 
 <!-- النص الرئيسي -->
-<div id="mainText">
-بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨  
-أنتِ كل حياتي وسبب سعادتي وكل دنيتي 💖🌙  
-قلبي ملكك وحدك وعيوني ما تشوف غيرك 🌸
-</div>
+<div id="mainText"></div>
 
 <!-- تسجيل الدخول -->
 <div id="login">
@@ -213,10 +240,10 @@ button{
 <div id="content">
 
 <div class="shapes">
-<div class="shape" onclick="showShape(0)">💖</div>
-<div class="shape" onclick="showShape(1)">🌸</div>
-<div class="shape" onclick="showShape(2)">✨</div>
-<div class="shape" onclick="showShape(3)">🌈</div>
+<div class="shape" onclick="showShape(0)">❤️</div>
+<div class="shape" onclick="showShape(1)">❤️</div>
+<div class="shape" onclick="showShape(2)">❤️</div>
+<div class="shape" onclick="showShape(3)">❤️</div>
 </div>
 
 <div id="shapeMessage"></div>
@@ -243,16 +270,15 @@ button{
 <source src="leo.mp3" type="audio/mpeg">
 </audio>
 
-</div>
-
 <script>
-/* القلوب */
+// ---------- القلوب ----------
 function createHearts(count=50){
     document.querySelectorAll(".heart").forEach(h=>h.remove());
+    let emoji = document.getElementById("setIconEmoji")?.value || "❤️";
     for(let i=0;i<count;i++){
         let h=document.createElement("div");
         h.className="heart";
-        h.innerHTML="❤️";
+        h.innerHTML=emoji;
         h.style.left=Math.random()*100+"vw";
         h.style.fontSize=(15+Math.random()*25)+"px";
         h.style.animationDuration=(4+Math.random()*5)+"s";
@@ -261,8 +287,8 @@ function createHearts(count=50){
 }
 createHearts();
 
-/* رسائل الأشكال */
-let shapeTexts=[
+// ---------- الأشكال ----------
+let shapeTexts = [
 "أنتِ أحلى واحدة في الدنيا 🥰",
 "قلبي كله ملكك ❤️",
 "بحبك فوق ما تتخيلي 🫂",
@@ -276,7 +302,7 @@ function showShape(i){
     setTimeout(()=>box.style.opacity=0,3000);
 }
 
-/* أنيميشن المحتوى */
+// ---------- محتوى الصور والبطاقات ----------
 function animateContent(){
     document.querySelectorAll(".gallery img").forEach((img,i)=>{
         setTimeout(()=>{
@@ -292,13 +318,21 @@ function animateContent(){
     });
 }
 
-/* الباسورد */
-let password="4/11/2002";
+// ---------- الباسورد ----------
+let password = document.getElementById("setPass").value;
 
 function checkPassword(){
-    let d=day.value,m=month.value,y=year.value;
+    let d=day.value, m=month.value, y=year.value;
     if(`${d}/${m}/${y}`===password){
         login.style.display="none";
+
+        // النص الرئيسي يظهر بعد الباسورد
+        const mainText = document.getElementById("mainText");
+        mainText.innerHTML = `بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨<br>
+أنتِ كل حياتي وسبب سعادتي وكل دنيتي 💖🌙<br>
+قلبي ملكك وحدك وعيوني ما تشوف غيرك 🌸`;
+        mainText.style.display="block";
+
         content.style.display="block";
         song.play();
         animateContent();
@@ -307,47 +341,54 @@ function checkPassword(){
     }
 }
 
-/* الإعدادات */
+// ---------- الإعدادات ----------
 function toggleSettings(){
-    settingsPanel.style.display =
-    settingsPanel.style.display==="block" ? "none" : "block";
+    settingsPanel.style.display = settingsPanel.style.display==="block" ? "none" : "block";
 }
 
+// تحديث القيم بجانب الشريط
+function updateRangeValue(slider, span){
+    span.innerText = slider.value;
+}
+setFontSize.oninput = ()=>updateRangeValue(setFontSize,fontSizeValue);
+setHearts.oninput = ()=>updateRangeValue(setHearts,heartsValue);
+setIconSize.oninput = ()=>updateRangeValue(setIconSize,iconSizeValue);
+setBorderWidth.oninput = ()=>updateRangeValue(setBorderWidth,borderWidthValue);
+
+// حفظ الإعدادات
 function saveSettings(){
-    localStorage.setItem("textColor",setTextColor.value);
-    localStorage.setItem("fontSize",setFontSize.value);
-    localStorage.setItem("hearts",setHearts.value);
-    localStorage.setItem("song",setSong.value);
-    localStorage.setItem("shapes",setShapes.value);
-    localStorage.setItem("pass",setPass.value);
-    applySettings();
+    // النص
+    mainText.style.color = setTextColor.value;
+    mainText.style.fontSize = setFontSize.value+"px";
+
+    // القلوب
+    createHearts(setHearts.value);
+
+    // الأيقونات
+    document.querySelectorAll(".shape").forEach(s=>{
+        s.innerHTML = setIconEmoji.value;
+        s.style.fontSize = setIconSize.value+"px";
+        s.style.border = `${setBorderWidth.value}px solid ${setBorderColor.value}`;
+    });
+
+    // البطاقات
+    document.querySelectorAll(".card").forEach(c=>{
+        c.style.border = `${setBorderWidth.value}px solid ${setBorderColor.value}`;
+    });
+
+    // الخلفية
+    document.body.style.background = setBackground.value;
+
+    // رسائل الأشكال
+    shapeTexts = setShapes.value.split("\n");
+
+    // الباسورد
+    password = setPass.value;
 }
 
-function resetSettings(){
-    localStorage.clear();
-    location.reload();
-}
+// إعادة ضبط
+function resetSettings(){ location.reload(); }
 
-function applySettings(){
-    if(localStorage.textColor)
-        mainText.style.color=localStorage.textColor;
-
-    if(localStorage.fontSize)
-        mainText.style.fontSize=localStorage.fontSize+"px";
-
-    if(localStorage.hearts)
-        createHearts(localStorage.hearts);
-
-    if(localStorage.song)
-        song.querySelector("source").src=localStorage.song;
-
-    if(localStorage.shapes)
-        shapeTexts=localStorage.shapes.split("\n");
-
-    if(localStorage.pass)
-        password=localStorage.pass;
-}
-applySettings();
 </script>
 
 </body>
