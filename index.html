@@ -23,7 +23,7 @@ body::before{
     width:100%;
     height:100%;
     z-index:-2;
-    background-image:url('background-pattern.png'); /* ضع صورة الخلفية هنا */
+    background-image:url('background-pattern.png');
     background-repeat:repeat;
     background-size:50px;
 }
@@ -36,7 +36,6 @@ body::before{
     transform-origin:center;
     z-index:-1;
 }
-
 @keyframes floatUp{
     0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
     50%{transform:translateY(50vh) translateX(15px) rotate(180deg);}
@@ -93,32 +92,31 @@ body::before{
 
 /* النص الرئيسي بعد الباسوورد */
 #main-text{
-    font-size:22px;
-    color:#000000;
+    font-size:24px;
+    color:#000; /* اللون أسود */
     font-weight:bold;
-    line-height:1.7;
+    line-height:1.6;
     margin-top:30px;
 }
 
-/* الأشكال التفاعلية (هدايا) */
+/* الأشكال التفاعلية (الهدايا) */
 .shape-section{
     margin-top:40px;
 }
 .shapes-container{
     display:flex;
-    flex-direction:column;
-    gap:15px;
+    flex-direction:column; /* تحت بعض */
+    gap:25px;
     padding:10px 0;
-    justify-content:center;
     align-items:center;
 }
 .shape{
-    font-size:60px;
+    font-size:70px; /* كبير ومميز */
     cursor:pointer;
     transition:0.3s;
 }
 .shape:hover{
-    transform:scale(1.2) rotate(10deg);
+    transform:scale(1.2) rotate(15deg);
 }
 #shape-message{
     position:fixed;
@@ -126,10 +124,10 @@ body::before{
     left:50%;
     transform:translateX(-50%);
     background:white;
-    padding:15px 25px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    font-size:18px;
+    padding:20px 30px;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(255,0,102,0.5);
+    font-size:20px;
     color:#ff0066;
     opacity:0;
     pointer-events:none;
@@ -233,14 +231,14 @@ for(let i=0;i<50;i++){
         بحبك أكتر من أي وقت فات، وأكتر من أي كلمة ❤️🌸
     </div>
 
-    <!-- الأشكال التفاعلية -->
+    <!-- الأشكال التفاعلية (الهدايا) -->
     <div class="shape-section">
         <p>أضغطي على الهدايا دول ♥️👇</p>
         <div class="shapes-container">
-            <div class="shape">🎁</div>
-            <div class="shape">🎁</div>
-            <div class="shape">🎁</div>
-            <div class="shape">🎁</div>
+            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">🎁</div>
+            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🎁</div>
+            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">🎁</div>
+            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🎁</div>
         </div>
     </div>
 
@@ -276,6 +274,20 @@ for(let i=0;i<50;i++){
 </div>
 
 <script>
+// الأشكال التفاعلية
+function showMessage(msg){
+    let box=document.getElementById("shape-message");
+    box.textContent=msg;
+    box.style.opacity=1;
+    box.style.pointerEvents='auto';
+    box.style.transform='translateX(-50%) scale(1.1)';
+    setTimeout(()=>{
+        box.style.opacity=0;
+        box.style.pointerEvents='none';
+        box.style.transform='translateX(-50%) scale(1)';
+    },3000);
+}
+
 // Animation الصور والبطاقات
 function animateCards(){
     let imgs=document.querySelectorAll(".gallery img");
@@ -312,17 +324,17 @@ function checkPassword(){
         temp.style.opacity="0";
         temp.style.transition="opacity 0.5s";
         document.body.appendChild(temp);
-
         setTimeout(()=>{ temp.style.opacity=1; },100);
         setTimeout(()=>{
             temp.style.opacity=0;
             setTimeout(()=>{
                 temp.remove();
                 document.getElementById("content").style.display="block";
-                document.getElementById("song").play(); // الأغنية تشتغل هنا
+                document.getElementById("song").play();
                 animateCards();
             },500);
         },2000);
+
     }else{
         error.innerHTML="الرقم غلط يا بقرة 🤌😂";
         error.style.display="block";
