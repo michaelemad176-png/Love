@@ -37,25 +37,54 @@ body::before{
 }
 
 /* الباسوورد */
+#login h2{
+    font-size:26px;
+    margin-bottom:15px;
+}
+.password-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:30px;
+}
 .password-container input{
-    margin:8px;
+    margin:8px 0; /* المسافة بين الحقول */
     padding:12px;
-    width:130px;
+    width:150px;
     font-size:18px;
     border-radius:12px;
     border:2px solid #ff3399;
     text-align:center;
+    box-shadow:0 4px 8px rgba(255,0,102,0.3);
+    transition:0.3s;
+}
+.password-container input:focus{
+    border-color:#ff3399;
+    box-shadow:0 0 15px rgba(255,51,153,0.6);
+    outline:none;
 }
 .password-container button{
     padding:12px 25px;
+    margin-top:12px; /* مسافة بين آخر حقل وزر الفتح */
     font-size:18px;
     border:none;
     border-radius:12px;
     background:#ff3399;
     color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+.password-container button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px rgba(255,51,153,0.5);
+}
+#error-msg{
+    color:red;
+    margin-top:10px;
+    display:none;
 }
 
-/* النص */
+/* النص بعد الباسوورد */
 #main-text{
     color:#000;
     font-size:22px;
@@ -101,11 +130,31 @@ body::before{
     width:100%;
     border-radius:15px;
 }
+.card p{
+    font-size:20px;
+    color:#ff0066;
+    font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
+<!-- قلوب متحركة -->
+<script>
+let shapes=["❤️","💕","💖","✨","🌸","🫂","🌹"];
+for(let i=0;i<50;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(15+Math.random()*25)+"px";
+    h.style.animationDuration=(4+Math.random()*4)+"s";
+    h.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];
+    document.body.appendChild(h);
+}
+</script>
+
+<!-- صفحة الباسوورد -->
 <div id="login">
     <h2>ادخلي تاريخ ميلادك ❤️</h2>
     <div class="password-container">
@@ -113,11 +162,14 @@ body::before{
         <input id="month" placeholder="الشهر">
         <input id="year" placeholder="السنة">
         <button onclick="checkPassword()">افتحي</button>
+        <p id="error-msg"></p>
     </div>
 </div>
 
+<!-- المحتوى بعد الباسوورد -->
 <div id="content" style="display:none;">
 
+<!-- النص الرئيسي -->
 <div id="main-text">
 إنتي كل حياتي، وبدونك ما ليش أي معنى 💖🌙✨<br>
 كل لحظة معاكِ أحلى من ألف لحظة 💕🫂<br>
@@ -127,39 +179,55 @@ body::before{
 معاكِ الدنيا أجمل وألوانها أزهى 🌈🫂<br>
 كل ثانية معاكِ كنز ما يتعوضش 💕💫<br>
 وجودك جنبي بيهون عليّ كل التعب 😘🫂<br>
-ضحكتك بتنور أيامي 🥰🌸
+ضحكتك بتنور أيامي وبتخلي قلبي يطير 🥰🌸<br>
+كل لحظة معاكِ بحس إني عايش في حلم جميل 🌙💖<br>
+إنتي نصفي التاني، وبدونك أنا ناقص ♥️✨<br>
+إنتي نبض قلبي وكل لحظة بفكر فيك 💓🌙<br>
+وجودك جنبي بيخليني حاسس بالأمان والسعادة 🫂✨<br>
+كل كلمة منك بتلمس قلبي وبتخليني أبتسم ❤️🌸<br>
+إنتي الأمل اللي مالي حياتي نور وحب 💖🌹<br>
+ضحكتك سحري الخاص اللي بيخلي روحي تطير 🥰🌈<br>
+حتى صمتك معايا أحلى من أي كلام 💞🫂<br>
+كل يوم معاكِ هو عيد وما فيش أجمل من لحظتك 🌕💖<br>
+إنتي سر سعادتي وكل أحلامي 💘✨<br>
+معاكِ الدنيا كلها أحلى، حتى الأيام الصعبة 🌹💫<br>
+بحبك أكتر من أي وقت فات، وأكتر من أي كلمة ❤️🌸
 </div>
 
+<!-- الأشكال التفاعلية -->
 <div class="shapes-container">
-<div class="shape">💖</div>
-<div class="shape">🌸</div>
-<div class="shape">✨</div>
-<div class="shape">🌈</div>
+<div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">💖</div>
+<div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🌸</div>
+<div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">✨</div>
+<div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🌈</div>
 </div>
 
+<div id="shape-message"></div>
+
+<!-- الصور -->
 <div class="gallery">
 <img src="jpg1.jpg">
 <img src="jpg2.jpg">
 <img src="jpg3.jpg">
 </div>
 
+<!-- الكروت -->
 <div class="cards">
 <div class="card">
 <img src="5.jpg">
 <p>تاريخ ميلاد القمر 4/11/2002🌕✨</p>
 </div>
-
 <div class="card">
 <img src="6.png">
 <p>أكتر حاجة بتحبها توتا بابا حبيبها🫂♥️</p>
 </div>
-
 <div class="card">
 <img src="jpg1.jpg">
 <p>أجمل صورة ليكي 🌹❤️</p>
 </div>
 </div>
 
+<!-- الموسيقى -->
 <audio id="song">
 <source src="leo.mp3" type="audio/mpeg">
 </audio>
@@ -167,30 +235,64 @@ body::before{
 </div>
 
 <script>
-for(let i=0;i<40;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(15+Math.random()*25)+"px";
-h.style.animationDuration=(4+Math.random()*4)+"s";
-h.innerHTML="❤️";
-document.body.appendChild(h);
+// الأشكال التفاعلية
+function showMessage(msg){
+    let box=document.getElementById("shape-message");
+    box.textContent=msg;
+    box.style.opacity=1;
+    box.style.pointerEvents='auto';
+    box.style.transform='translateX(-50%) scale(1.1)';
+    setTimeout(()=>{
+        box.style.opacity=0;
+        box.style.pointerEvents='none';
+        box.style.transform='translateX(-50%) scale(1)';
+    },3000);
 }
 
+// Animation الصور والكروت
+function animateCards(){
+    let imgs=document.querySelectorAll(".gallery img");
+    imgs.forEach((img,i)=>{
+        setTimeout(()=>{
+            img.style.opacity=1;
+            img.style.transform='scale(1)';
+        }, i*600);
+    });
+    let cards=document.querySelectorAll(".card");
+    cards.forEach((card,i)=>{
+        setTimeout(()=>{
+            card.style.opacity=1;
+            card.style.transform='translateY(0) scale(1)';
+        }, imgs.length*600 + i*600);
+    });
+}
+
+// تحقق الباسوورد
 function checkPassword(){
-if(day.value=="4" && month.value=="11" && year.value=="2002"){
-login.style.display="none";
+    var day=document.getElementById("day").value;
+    var month=document.getElementById("month").value;
+    var year=document.getElementById("year").value;
+    var error=document.getElementById("error-msg");
 
-let msg=document.createElement("h2");
-msg.innerHTML="♥️شطورة حبيبة بابا♥️";
-document.body.appendChild(msg);
+    if(day=="4" && month=="11" && year=="2002"){
+        document.getElementById("login").style.display="none";
 
-setTimeout(()=>{
-msg.remove();
-content.style.display="block";
-song.play().catch(()=>{});
-},2000);
-}
+        let msg=document.createElement("h2");
+        msg.innerHTML="♥️شطورة حبيبة بابا♥️";
+        msg.style.color="#ff0066";
+        msg.style.marginTop="50px";
+        document.body.appendChild(msg);
+
+        setTimeout(()=>{
+            msg.remove();
+            document.getElementById("content").style.display="block";
+            document.getElementById("song").play().catch(()=>{});
+            animateCards();
+        },2000);
+    }else{
+        error.innerHTML="الرقم غلط يا بقرة 🤌😂";
+        error.style.display="block";
+    }
 }
 </script>
 
