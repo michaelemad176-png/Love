@@ -4,133 +4,148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tota & Moka ❤️</title>
-
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:'Arial', sans-serif;
     background:#ffe6f0;
-    text-align:center;
     overflow-x:hidden;
+    text-align:center;
+    position: relative;
 }
-
-/* زر الإعدادات */
-#settingsBtn{
+/* الخلفية الثابتة بأيقونات الحب */
+body::before{
+    content:"";
     position:fixed;
-    top:15px;
-    right:15px;
-    font-size:28px;
-    cursor:pointer;
-    z-index:9999;
-}
-
-/* لوحة الإعدادات */
-#settingsPanel{
-    position:fixed;
-    top:60px;
-    right:15px;
-    width:280px;
-    background:#fff;
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.2);
-    display:none;
-    z-index:9999;
-    text-align:right;
-    font-size:14px;
-}
-#settingsPanel label{
-    display:block;
-    margin-top:8px;
-}
-#settingsPanel input,
-#settingsPanel textarea,
-#settingsPanel select{
+    top:0;
+    left:0;
     width:100%;
-    margin:4px 0 10px;
+    height:100%;
+    z-index:-2;
+    background-image:url('background-pattern.png');
+    background-repeat:repeat;
+    background-size:50px;
 }
 
-/* النسبة المئوية */
-.rangeValue{
-    float:right;
-    margin-right:5px;
-}
-
-/* النص الرئيسي */
-#mainText{
-    font-size:28px;
-    color:#ff0066;
-    margin:40px 20px;
-    font-weight:bold;
-    line-height:1.6;
-    display:none;
-}
-
-/* القلوب */
+/* القلوب المتوهجة المتحركة */
 .heart{
-    position:fixed;
+    position: fixed;
     pointer-events:none;
-    animation:floatUp linear infinite;
+    animation: floatUp linear infinite;
+    transform-origin:center;
     z-index:-1;
 }
 @keyframes floatUp{
-    0%{transform:translateY(100vh);}
-    100%{transform:translateY(-20vh);}
+    0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
+    50%{transform:translateY(50vh) translateX(15px) rotate(180deg);}
+    100%{transform:translateY(-50vh) translateX(-10px) rotate(360deg);}
 }
 
-/* تسجيل الدخول */
-#login{
-    margin-top:20px;
+/* النص الرئيسي ثابت بعد الباسوورد */
+#main-text{
+    font-size:28px;
+    color:#ff0066;
+    margin-top:50px;
+    font-weight:bold;
+    display:none; /* يظهر بعد الباسوورد */
 }
-.passwordBox{
+
+/* خانات الباسوورد */
+.password-container{
     display:flex;
     flex-direction:column;
     align-items:center;
+    margin-top:30px;
 }
-.passwordBox input{
-    margin:6px 0;
+
+.password-container input{
+    margin:8px 0;
     padding:10px;
+    font-size:18px;
     border-radius:10px;
     border:2px solid #ff8fc0;
     text-align:center;
 }
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    background:#ff3399;
-    color:#fff;
+
+.password-container button{
+    padding:12px 20px;
+    margin-top:10px;
     font-size:18px;
+    border-radius:10px;
+    border:none;
+    background-color:#ff3399;
+    color:white;
     cursor:pointer;
 }
-#errorMsg{
+
+#error-msg{
     color:red;
     margin-top:10px;
-}
-
-/* المحتوى */
-#content{
     display:none;
 }
 
-/* الأشكال */
-.shapes{
+/* الأشكال التفاعلية */
+.shape-section{
+    margin-top:40px;
+}
+.shapes-container{
     display:flex;
+    gap:15px;
+    overflow-x:auto;
+    padding:10px 0;
     justify-content:center;
-    gap:20px;
-    margin:30px 0;
 }
 .shape{
     font-size:40px;
     cursor:pointer;
-    border:2px solid #ff0066;
-    padding:10px;
-    border-radius:15px;
     transition:0.3s;
+}
+.shape:hover{
+    transform:scale(1.2) rotate(10deg);
+}
+
+/* صور وبطاقات */
+.gallery img{
+    width:85%;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,0,102,0.5);
+    margin-bottom:15px;
+    opacity:0;
+    transform:scale(0.8);
+    transition:1s;
+}
+
+.cards{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:15px;
+    box-shadow:0 0 20px rgba(255,0,102,0.4);
+    opacity:0;
+    transform: translateY(30px) scale(0.9);
+    transition:1s;
+}
+
+.card img{
+    width:100%;
+    border-radius:15px;
+}
+
+.card p{
+    margin-top:10px;
+    font-size:20px;
+    color:#ff0066;
+    font-weight:bold;
 }
 
 /* رسالة الأشكال */
-#shapeMessage{
+#shape-message{
     position:fixed;
     top:30%;
     left:50%;
@@ -142,253 +157,270 @@ button{
     font-size:18px;
     color:#ff0066;
     opacity:0;
-    transition:0.4s;
+    pointer-events:none;
+    transition:0.5s;
 }
 
-/* الصور */
-.gallery img{
-    width:85%;
-    border-radius:20px;
-    margin:15px 0;
-    opacity:0;
-    transform:scale(0.8);
-    transition:1s;
+/* لوحة الإعدادات */
+#settingsBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    font-size:28px;
+    cursor:pointer;
+    z-index:999;
 }
-.cards{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    margin:20px;
-}
-.card{
+#settingsPanel{
+    position:fixed;
+    top:0;
+    right:0;
+    width:300px;
+    height:100vh;
     background:white;
-    padding:15px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.4);
-    opacity:0;
-    transform:translateY(30px);
-    transition:1s;
+    box-shadow:-5px 0 15px rgba(0,0,0,0.2);
+    padding:20px;
+    display:none;
+    flex-direction:column;
+    gap:15px;
+    overflow-y:auto;
+    z-index:1000;
 }
-.card img{
+#settingsPanel h3{
+    margin-top:0;
+    font-size:20px;
+    color:#ff3399;
+}
+#settingsPanel label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+    color:#ff0066;
+}
+#settingsPanel input[type="color"],
+#settingsPanel input[type="range"],
+#settingsPanel select,
+#settingsPanel input[type="file"],
+#settingsPanel input[type="text"]{
     width:100%;
-    border-radius:15px;
+    margin-top:5px;
 }
 </style>
 </head>
 <body>
 
+<script>
+// القلوب المتوهجة المتحركة
+let shapes=["❤️","💕","💖","✨","🌸","🫂","🌹"];
+let colors=["#ff6699","#ff3399","#ff99cc","#ffccff","#ffb3d9"];
+for(let i=0;i<50;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(15+Math.random()*25)+"px";
+    heart.style.color=colors[Math.floor(Math.random()*colors.length)];
+    heart.style.animationDuration=(4+Math.random()*5)+"s";
+    heart.style.opacity=Math.random()*0.8+0.3;
+    heart.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];
+    document.body.appendChild(heart);
+}
+</script>
+
 <!-- زر الإعدادات -->
 <div id="settingsBtn" onclick="toggleSettings()">⚙️</div>
-
-<!-- لوحة الإعدادات -->
 <div id="settingsPanel">
-<h3>الإعدادات</h3>
+    <h3>إعدادات الموقع</h3>
+    
+    <label>لون النص الرئيسي</label>
+    <input type="color" id="mainTextColor" value="#ff0066" onchange="updateMainTextColor()">
 
-<label>لون النص <span id="textColorValue"></span></label>
-<input type="color" id="setTextColor" value="#ff0066">
+    <label>حجم النص الرئيسي</label>
+    <input type="range" id="mainTextSize" min="16" max="50" value="28" oninput="updateMainTextSize()">
 
-<label>حجم النص <span id="fontSizeValue">28</span> px</label>
-<input type="range" id="setFontSize" min="18" max="40" value="28">
+    <label>خلفية الموقع</label>
+    <input type="color" id="bgColor" value="#ffe6f0" onchange="updateBGColor()">
 
-<label>عدد القلوب <span id="heartsValue">50</span></label>
-<input type="range" id="setHearts" min="10" max="150" value="50">
+    <label>رفع صورة جديدة</label>
+    <input type="file" id="newImageInput" accept="image/*">
+    <button onclick="addImage()">إضافة الصورة</button>
 
-<label>حجم الأيقونات <span id="iconSizeValue">40</span> px</label>
-<input type="range" id="setIconSize" min="20" max="100" value="40">
-
-<label>شكل الأيقونات (Emoji)</label>
-<input type="text" id="setIconEmoji" value="❤️">
-
-<label>سمك الفريم حول الأيقونات والبطاقات <span id="borderWidthValue">2</span> px</label>
-<input type="range" id="setBorderWidth" min="1" max="10" value="2">
-
-<label>لون الفريم</label>
-<input type="color" id="setBorderColor" value="#ff0066">
-
-<label>الخلفية (لون أو صورة URL)</label>
-<input type="text" id="setBackground" placeholder="مثال: #ffe6f0 أو url('bg.png')">
-
-<label>رسائل الأشكال (سطر لكل رسالة)</label>
-<textarea id="setShapes">أنتِ أحلى واحدة في الدنيا 🥰
-قلبي كله ملكك ❤️
-بحبك فوق ما تتخيلي 🫂
-كل يوم معاكِ أحلى 💕</textarea>
-
-<label>الباسورد</label>
-<input type="text" id="setPass" value="4/11/2002">
-
-<button onclick="saveSettings()">حفظ</button>
-<button onclick="resetSettings()">Reset</button>
+    <label>إضافة نص جديد</label>
+    <input type="text" id="newTextInput" placeholder="اكتب النص هنا">
+    <button onclick="addText()">إضافة النص</button>
+    
+    <div id="newImagesContainer"></div>
+    <div id="newTextsContainer"></div>
 </div>
 
 <!-- النص الرئيسي -->
-<div id="mainText"></div>
+<div id="main-text">بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨</div>
 
-<!-- تسجيل الدخول -->
-<div id="login">
-<h2>Tota & Moka Forever 🔐♥️</h2>
-<div class="passwordBox">
-<input type="number" id="day" placeholder="اليوم">
-<input type="number" id="month" placeholder="الشهر">
-<input type="number" id="year" placeholder="السنة">
-<button onclick="checkPassword()">افتحي</button>
-<div id="errorMsg"></div>
-</div>
+<!-- صفحة الرقم السري -->
+<div class="container" id="login">
+    <h2 style="font-size:26px; margin-bottom:15px;">Tota&Moka Forever 🔐♥️🫂</h2>
+    <h2>ادخلي تاريخ ميلادك ❤️</h2>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:15px; align-items:center;">
+        <input type="number" id="day" placeholder="اليوم" style="width:120px;">
+        <input type="number" id="month" placeholder="الشهر" style="width:120px;">
+        <input type="number" id="year" placeholder="السنة" style="width:120px;">
+    </div>
+    <button onclick="checkPassword()">افتحي</button>
+    <p id="error-msg"></p>
 </div>
 
 <!-- المحتوى -->
-<div id="content">
+<div class="container" id="content" style="display:none;">
 
-<div class="shapes">
-<div class="shape" onclick="showShape(0)">❤️</div>
-<div class="shape" onclick="showShape(1)">❤️</div>
-<div class="shape" onclick="showShape(2)">❤️</div>
-<div class="shape" onclick="showShape(3)">❤️</div>
+    <div id="extra-messages" style="margin-top:20px;"></div>
+
+    <!-- الأشكال التفاعلية -->
+    <div class="shape-section">
+        <p style="font-size:20px; color:#ff0066; margin-bottom:10px;">
+            أضغطي بصوابعك الحلوين دول عالاشكال دى ♥️👇
+        </p>
+        <div class="shapes-container">
+            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">💖</div>
+            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🌸</div>
+            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">✨</div>
+            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🌈</div>
+        </div>
+    </div>
+
+    <div id="shape-message"></div>
+
+    <div class="gallery">
+        <img src="jpg1.jpg">
+        <img src="jpg2.jpg">
+        <img src="jpg3.jpg">
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <img src="5.jpg">
+            <p>تاريخ ميلاد القمر 4/11/2002🌕✨</p>
+        </div>
+
+        <div class="card">
+            <img src="6.png">
+            <p>أكتر حاجة بتحبها توتا بابا حبيبها🫂♥️</p>
+        </div>
+
+        <div class="card">
+            <img src="jpg1.jpg">
+            <p>أجمل صورة ليكي 🌹❤️</p>
+        </div>
+    </div>
+
+    <audio id="song" autoplay>
+        <source src="leo.mp3" type="audio/mpeg">
+    </audio>
 </div>
-
-<div id="shapeMessage"></div>
-
-<div class="gallery">
-<img src="jpg1.jpg">
-<img src="jpg2.jpg">
-<img src="jpg3.jpg">
-</div>
-
-<div class="cards">
-<div class="card">
-<img src="5.jpg">
-<p>تاريخ ميلاد القمر 4/11/2002 🌕</p>
-</div>
-
-<div class="card">
-<img src="6.png">
-<p>أكتر حاجة بتحبها توتا 🫂♥️</p>
-</div>
-</div>
-
-<audio id="song" autoplay>
-<source src="leo.mp3" type="audio/mpeg">
-</audio>
 
 <script>
-// ---------- القلوب ----------
-function createHearts(count=50){
-    document.querySelectorAll(".heart").forEach(h=>h.remove());
-    let emoji = document.getElementById("setIconEmoji")?.value || "❤️";
-    for(let i=0;i<count;i++){
-        let h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML=emoji;
-        h.style.left=Math.random()*100+"vw";
-        h.style.fontSize=(15+Math.random()*25)+"px";
-        h.style.animationDuration=(4+Math.random()*5)+"s";
-        document.body.appendChild(h);
+// Toggle إعدادات
+function toggleSettings(){
+    const panel = document.getElementById("settingsPanel");
+    panel.style.display = (panel.style.display==="flex")?"none":"flex";
+}
+
+// تغيير لون النص الرئيسي
+function updateMainTextColor(){
+    const color = document.getElementById("mainTextColor").value;
+    document.getElementById("main-text").style.color = color;
+}
+// تغيير حجم النص الرئيسي
+function updateMainTextSize(){
+    const size = document.getElementById("mainTextSize").value;
+    document.getElementById("main-text").style.fontSize = size + "px";
+}
+// تغيير الخلفية
+function updateBGColor(){
+    const color = document.getElementById("bgColor").value;
+    document.body.style.background = color;
+}
+
+// إضافة صورة جديدة من الموبايل
+function addImage(){
+    const input = document.getElementById("newImageInput");
+    if(input.files && input.files[0]){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.style.width = "80%";
+            img.style.borderRadius = "15px";
+            img.style.marginTop = "10px";
+            img.style.border = "3px solid #ff3399"; // فريم افتراضي
+            document.getElementById("newImagesContainer").appendChild(img);
+        }
+        reader.readAsDataURL(input.files[0]);
     }
 }
-createHearts();
 
-// ---------- الأشكال ----------
-let shapeTexts = [
-"أنتِ أحلى واحدة في الدنيا 🥰",
-"قلبي كله ملكك ❤️",
-"بحبك فوق ما تتخيلي 🫂",
-"كل يوم معاكِ أحلى 💕"
-];
-
-function showShape(i){
-    let box=document.getElementById("shapeMessage");
-    box.textContent=shapeTexts[i];
-    box.style.opacity=1;
-    setTimeout(()=>box.style.opacity=0,3000);
+// إضافة نص جديد
+function addText(){
+    const text = document.getElementById("newTextInput").value;
+    if(text.trim() !== ""){
+        const p = document.createElement("p");
+        p.textContent = text;
+        p.style.fontSize = "20px";
+        p.style.color = "#ff0066";
+        p.style.marginTop = "10px";
+        document.getElementById("newTextsContainer").appendChild(p);
+        document.getElementById("newTextInput").value = "";
+    }
 }
 
-// ---------- محتوى الصور والبطاقات ----------
-function animateContent(){
-    document.querySelectorAll(".gallery img").forEach((img,i)=>{
+// الرسائل عند الضغط على الأشكال
+function showMessage(msg){
+    let box=document.getElementById("shape-message");
+    box.textContent=msg;
+    box.style.opacity=1;
+    box.style.pointerEvents='auto';
+    box.style.transform='translateX(-50%) scale(1.1)';
+    setTimeout(()=>{
+        box.style.opacity=0;
+        box.style.pointerEvents='none';
+        box.style.transform='translateX(-50%) scale(1)';
+    },3000);
+}
+
+// Animation الصور والبطاقات
+function animateCards(){
+    let imgs=document.querySelectorAll(".gallery img");
+    imgs.forEach((img,i)=>{
         setTimeout(()=>{
             img.style.opacity=1;
-            img.style.transform="scale(1)";
-        },i*400);
+            img.style.transform='scale(1)';
+        }, i*600);
     });
-    document.querySelectorAll(".card").forEach((c,i)=>{
+
+    let cards=document.querySelectorAll(".card");
+    cards.forEach((card,i)=>{
         setTimeout(()=>{
-            c.style.opacity=1;
-            c.style.transform="translateY(0)";
-        },1200+i*400);
+            card.style.opacity=1;
+            card.style.transform='translateY(0) scale(1)';
+        }, imgs.length*600 + i*600);
     });
 }
 
-// ---------- الباسورد ----------
-let password = document.getElementById("setPass").value;
-
+// تحقق تاريخ الميلاد
 function checkPassword(){
-    let d=day.value, m=month.value, y=year.value;
-    if(`${d}/${m}/${y}`===password){
-        login.style.display="none";
+    var day=document.getElementById("day").value;
+    var month=document.getElementById("month").value;
+    var year=document.getElementById("year").value;
+    var error=document.getElementById("error-msg");
 
-        // النص الرئيسي يظهر بعد الباسورد
-        const mainText = document.getElementById("mainText");
-        mainText.innerHTML = `بحبك يا أجمل وأرق وأحن وألطف واحدة قابلتها في حياتي 🫂♥️✨<br>
-أنتِ كل حياتي وسبب سعادتي وكل دنيتي 💖🌙<br>
-قلبي ملكك وحدك وعيوني ما تشوف غيرك 🌸`;
-        mainText.style.display="block";
-
-        content.style.display="block";
-        song.play();
-        animateContent();
+    if(day=="4" && month=="11" && year=="2002"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("main-text").style.display="block";
+        document.getElementById("content").style.display="block";
+        document.getElementById("song").play();
+        animateCards();
     }else{
-        errorMsg.innerText="الرقم غلط يا بقرة 🤌😂";
+        error.innerHTML="الرقم غلط يا بقرة 🤌😂";
+        error.style.display="block";
     }
 }
-
-// ---------- الإعدادات ----------
-function toggleSettings(){
-    settingsPanel.style.display = settingsPanel.style.display==="block" ? "none" : "block";
-}
-
-// تحديث القيم بجانب الشريط
-function updateRangeValue(slider, span){
-    span.innerText = slider.value;
-}
-setFontSize.oninput = ()=>updateRangeValue(setFontSize,fontSizeValue);
-setHearts.oninput = ()=>updateRangeValue(setHearts,heartsValue);
-setIconSize.oninput = ()=>updateRangeValue(setIconSize,iconSizeValue);
-setBorderWidth.oninput = ()=>updateRangeValue(setBorderWidth,borderWidthValue);
-
-// حفظ الإعدادات
-function saveSettings(){
-    // النص
-    mainText.style.color = setTextColor.value;
-    mainText.style.fontSize = setFontSize.value+"px";
-
-    // القلوب
-    createHearts(setHearts.value);
-
-    // الأيقونات
-    document.querySelectorAll(".shape").forEach(s=>{
-        s.innerHTML = setIconEmoji.value;
-        s.style.fontSize = setIconSize.value+"px";
-        s.style.border = `${setBorderWidth.value}px solid ${setBorderColor.value}`;
-    });
-
-    // البطاقات
-    document.querySelectorAll(".card").forEach(c=>{
-        c.style.border = `${setBorderWidth.value}px solid ${setBorderColor.value}`;
-    });
-
-    // الخلفية
-    document.body.style.background = setBackground.value;
-
-    // رسائل الأشكال
-    shapeTexts = setShapes.value.split("\n");
-
-    // الباسورد
-    password = setPass.value;
-}
-
-// إعادة ضبط
-function resetSettings(){ location.reload(); }
-
 </script>
 
 </body>
