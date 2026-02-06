@@ -4,136 +4,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tota & Moka ❤️</title>
+
 <style>
 body{
     margin:0;
-    font-family:'Arial', sans-serif;
+    font-family:Arial, sans-serif;
     background:#ffe6f0;
-    overflow-x:hidden;
     text-align:center;
-    position: relative;
+    overflow-x:hidden;
 }
 
-/* الخلفية */
+/* خلفية الأيقونات */
 body::before{
     content:"";
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    inset:0;
     z-index:-2;
-    background-image:url('background-pattern.png');
-    background-repeat:repeat;
+    background:url('background-pattern.png') repeat;
     background-size:50px;
 }
 
-/* القلوب */
+/* قلوب متحركة */
 .heart{
-    position: fixed;
-    pointer-events:none;
-    animation: floatUp linear infinite;
-    transform-origin:center;
+    position:fixed;
     z-index:-1;
+    animation:floatUp linear infinite;
+    pointer-events:none;
 }
 @keyframes floatUp{
-    0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
-    100%{transform:translateY(-50vh) translateX(-10px) rotate(360deg);}
-}
-
-/* النص الرئيسي */
-#main-text{
-    font-size:24px;
-    color:#000;   /* أسود */
-    font-weight:bold;
-    line-height:1.8;
-    margin-top:30px;
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-20vh);}
 }
 
 /* الباسوورد */
-.password-container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:30px;
-}
 .password-container input{
-    margin:8px 0;
+    margin:8px;
     padding:12px;
-    font-size:18px;
-    border-radius:15px;
-    border:2px solid #ff8fc0;
-    text-align:center;
     width:130px;
+    font-size:18px;
+    border-radius:12px;
+    border:2px solid #ff3399;
+    text-align:center;
 }
 .password-container button{
     padding:12px 25px;
-    margin-top:10px;
     font-size:18px;
-    border-radius:15px;
     border:none;
-    background-color:#ff3399;
-    color:white;
-    cursor:pointer;
+    border-radius:12px;
+    background:#ff3399;
+    color:#fff;
+}
+
+/* النص */
+#main-text{
+    color:#000;
+    font-size:22px;
+    line-height:1.8;
+    margin:30px 15px;
+    font-weight:bold;
 }
 
 /* الأشكال */
-.shape-section{ margin-top:40px; }
 .shapes-container{
     display:flex;
     gap:20px;
     justify-content:center;
+    margin:20px;
 }
-.shape{ font-size:45px; cursor:pointer; }
-
-#shape-message{
-    position:fixed;
-    top:30%;
-    left:50%;
-    transform:translateX(-50%);
-    background:white;
-    padding:15px 25px;
-    border-radius:20px;
-    opacity:0;
-    transition:0.5s;
+.shape{
+    font-size:45px;
+    cursor:pointer;
 }
 
 /* الصور */
 .gallery img{
     width:85%;
     border-radius:20px;
-    margin-bottom:15px;
-    opacity:0;
-    transform:scale(0.8);
-    transition:1s;
+    margin:15px 0;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
-.cards{ margin-top:30px; }
+
+/* الكروت */
+.cards{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    margin:20px;
+}
 .card{
-    background:white;
-    border-radius:20px;
+    background:#fff;
     padding:15px;
-    margin-bottom:20px;
-    opacity:0;
-    transform: translateY(30px) scale(0.9);
-    transition:1s;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+.card img{
+    width:100%;
+    border-radius:15px;
 }
 </style>
 </head>
+
 <body>
 
-<!-- صفحة الباسوورد -->
 <div id="login">
     <h2>ادخلي تاريخ ميلادك ❤️</h2>
     <div class="password-container">
-        <input type="number" id="day" placeholder="اليوم">
-        <input type="number" id="month" placeholder="الشهر">
-        <input type="number" id="year" placeholder="السنة">
+        <input id="day" placeholder="اليوم">
+        <input id="month" placeholder="الشهر">
+        <input id="year" placeholder="السنة">
         <button onclick="checkPassword()">افتحي</button>
-        <p id="error-msg"></p>
     </div>
 </div>
 
-<!-- المحتوى -->
 <div id="content" style="display:none;">
 
 <div id="main-text">
@@ -145,56 +127,70 @@ body::before{
 معاكِ الدنيا أجمل وألوانها أزهى 🌈🫂<br>
 كل ثانية معاكِ كنز ما يتعوضش 💕💫<br>
 وجودك جنبي بيهون عليّ كل التعب 😘🫂<br>
-ضحكتك بتنور أيامي وبتخلي قلبي يطير 🥰🌸<br>
-كل لحظة معاكِ بحس إني عايش في حلم جميل 🌙💖<br>
-إنتي نصفي التاني، وبدونك أنا ناقص ♥️✨<br>
-إنتي نبض قلبي وكل لحظة بفكر فيك 💓🌙<br>
-وجودك جنبي بيخليني حاسس بالأمان والسعادة 🫂✨<br>
-كل كلمة منك بتلمس قلبي وبتخليني أبتسم ❤️🌸<br>
-إنتي الأمل اللي مالي حياتي نور وحب 💖🌹<br>
-ضحكتك سحري الخاص اللي بيخلي روحي تطير 🥰🌈<br>
-حتى صمتك معايا أحلى من أي كلام 💞🫂<br>
-كل يوم معاكِ هو عيد وما فيش أجمل من لحظتك 🌕💖<br>
-إنتي سر سعادتي وكل أحلامي 💘✨<br>
-معاكِ الدنيا كلها أحلى، حتى الأيام الصعبة 🌹💫<br>
-بحبك أكتر من أي وقت فات، وأكتر من أي كلمة ❤️🌸
+ضحكتك بتنور أيامي 🥰🌸
+</div>
+
+<div class="shapes-container">
+<div class="shape">💖</div>
+<div class="shape">🌸</div>
+<div class="shape">✨</div>
+<div class="shape">🌈</div>
+</div>
+
+<div class="gallery">
+<img src="jpg1.jpg">
+<img src="jpg2.jpg">
+<img src="jpg3.jpg">
+</div>
+
+<div class="cards">
+<div class="card">
+<img src="5.jpg">
+<p>تاريخ ميلاد القمر 4/11/2002🌕✨</p>
+</div>
+
+<div class="card">
+<img src="6.png">
+<p>أكتر حاجة بتحبها توتا بابا حبيبها🫂♥️</p>
+</div>
+
+<div class="card">
+<img src="jpg1.jpg">
+<p>أجمل صورة ليكي 🌹❤️</p>
+</div>
 </div>
 
 <audio id="song">
-    <source src="leo.mp3" type="audio/mpeg">
+<source src="leo.mp3" type="audio/mpeg">
 </audio>
 
 </div>
 
 <script>
-function animateCards(){
-    document.querySelectorAll(".gallery img, .card").forEach((el,i)=>{
-        setTimeout(()=>{
-            el.style.opacity=1;
-            el.style.transform='none';
-        }, i*300);
-    });
+for(let i=0;i<40;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(15+Math.random()*25)+"px";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+h.innerHTML="❤️";
+document.body.appendChild(h);
 }
 
 function checkPassword(){
-    if(day.value=="4" && month.value=="11" && year.value=="2002"){
-        login.style.display="none";
+if(day.value=="4" && month.value=="11" && year.value=="2002"){
+login.style.display="none";
 
-        let msg=document.createElement("div");
-        msg.innerHTML="♥️شطورة حبيبة بابا♥️";
-        msg.style.fontSize="30px";
-        msg.style.marginTop="50px";
-        document.body.appendChild(msg);
+let msg=document.createElement("h2");
+msg.innerHTML="♥️شطورة حبيبة بابا♥️";
+document.body.appendChild(msg);
 
-        setTimeout(()=>{
-            msg.remove();
-            content.style.display="block";
-            setTimeout(()=>{
-                animateCards();
-                song.play().catch(()=>{});
-            },300);
-        },2000);
-    }
+setTimeout(()=>{
+msg.remove();
+content.style.display="block";
+song.play().catch(()=>{});
+},2000);
+}
 }
 </script>
 
