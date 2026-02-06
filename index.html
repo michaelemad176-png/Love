@@ -4,589 +4,121 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tota & Moka ❤️</title>
+
 <style>
 body{
     margin:0;
-    font-family:'Arial', sans-serif;
+    font-family:Arial, sans-serif;
     background:#ffe6f0;
     overflow-x:hidden;
     text-align:center;
-    position: relative;
 }
 
-/* الخلفية الثابتة بأيقونات الحب */
-body::before{
-    content:"";<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tota & Moka ❤️</title>
-<style>
-body{
-    margin:0;
-    font-family:'Arial', sans-serif;
-    background:#ffe6f0;
-    overflow-x:hidden;
-    text-align:center;
-    position: relative;
-}
-
-/* الخلفية الثابتة بأيقونات الحب */
+/* خلفية ايموجي حب */
 body::before{
     content:"";
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-2;
-    background-image:url('A_seamless_digital_digital_illustration_background.png'); /* الخلفية الجديدة */
-    background-repeat:repeat;
-    background-size:50px;
-}
-
-/* القلوب المتوهجة المتحركة */
-.heart{
-    position: fixed;
-    pointer-events:none;
-    animation: floatUp linear infinite;
-    transform-origin:center;
-    z-index:-1;
-}
-@keyframes floatUp{
-    0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
-    50%{transform:translateY(50vh) translateX(15px) rotate(180deg);}
-    100%{transform:translateY(-50vh) translateX(-10px) rotate(360deg);}
-}
-
-/* النص الرئيسي */
-#main-text{
-    font-size:28px;
-    color:#ff0066;
-    margin-top:50px;
-    font-weight:bold;
-    display:none; /* هيظهر بعد الباسوورد */
-}
-
-/* خانات الباسوورد */
-.password-container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:30px;
-}
-
-.password-container input{
-    margin:8px 0;
-    padding:15px;
-    font-size:22px;
-    border-radius:12px;
-    border:2px solid #ff8fc0;
-    text-align:center;
-}
-
-.password-container button{
-    padding:12px 25px;
-    margin-top:10px;
-    font-size:20px;
-    border-radius:12px;
-    border:none;
-    background-color:#ff3399;
-    color:white;
-    cursor:pointer;
-}
-
-#error-msg{
-    color:red;
-    margin-top:10px;
-    display:none;
-}
-
-/* الأشكال التفاعلية */
-.shape-section{
-    margin-top:40px;
-}
-
-.shapes-container{
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    padding:10px 0;
-    justify-content:center;
-}
-
-.shape{
-    font-size:40px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.shape:hover{
-    transform:scale(1.2) rotate(10deg);
-}
-
-/* صور وبطاقات */
-.gallery img{
-    width:85%;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    margin-bottom:15px;
-    opacity:0;
-    transform:scale(0.8);
-    transition:1s;
-}
-
-.cards{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-    margin-top:30px;
-}
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:15px;
-    box-shadow:0 0 20px rgba(255,0,102,0.4);
-    opacity:0;
-    transform: translateY(30px) scale(0.9);
-    transition:1s;
-}
-
-.card img{
-    width:100%;
-    border-radius:15px;
-}
-
-.card p{
-    margin-top:10px;
-    font-size:20px;
-    color:#ff0066;
-    font-weight:bold;
-}
-
-/* رسالة الأشكال */
-#shape-message{
-    position:fixed;
-    top:30%;
-    left:50%;
-    transform:translateX(-50%);
-    background:white;
-    padding:15px 25px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    font-size:18px;
-    color:#ff0066;
-    opacity:0;
-    pointer-events:none;
-    transition:0.5s;
-}
-</style>
-</head>
-<body>
-
-<script>
-// إنشاء القلوب المتوهجة المتحركة
-let shapes=["🌹","♥️","🌕","😘","🙈","✨","🫂","🔥","🎊","💌","💕","💘","💓","💞","❣️"];
-let colors=["#ffcc66","#ffcc33","#ffdd88","#ffbb66","#ffddaa"];
-for(let i=0;i<500;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(5+Math.random()*10)+"px"; // صغار جدًا
-    heart.style.color=colors[Math.floor(Math.random()*colors.length)];
-    heart.style.animationDuration=(4+Math.random()*5)+"s";
-    heart.style.opacity=Math.random()*0.6+0.2;
-    heart.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];
-    document.body.appendChild(heart);
-}
-</script>
-
-<!-- النص الرئيسي -->
-<div id="main-text"></div>
-
-<!-- صفحة الرقم السري -->
-<div class="container" id="login">
-    <h2 style="font-size:26px; margin-bottom:15px;">Tota&Moka Forever 🔐♥️🫂</h2>
-    <h2>ادخلي تاريخ ميلادك ❤️</h2>
-    <div style="display:flex; flex-direction:column; gap:15px; margin-top:15px; align-items:center;">
-        <input type="number" id="day" placeholder="اليوم" style="width:140px;">
-        <input type="number" id="month" placeholder="الشهر" style="width:140px;">
-        <input type="number" id="year" placeholder="السنة" style="width:140px;">
-    </div>
-    <button onclick="checkPassword()">افتحي</button>
-    <p id="error-msg"></p>
-</div>
-
-<!-- المحتوى -->
-<div class="container" id="content" style="display:none;">
-
-    <div id="extra-messages" style="margin-top:20px;"></div>
-
-    <!-- الأشكال التفاعلية -->
-    <div class="shape-section">
-        <p style="font-size:20px; color:#ff0066; margin-bottom:10px;">
-            أضغطي بصوابعك الحلوين دول عالاشكال دى ♥️👇
-        </p>
-        <div class="shapes-container">
-            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">💖</div>
-            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🌸</div>
-            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">✨</div>
-            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🌈</div>
-        </div>
-    </div>
-
-    <div id="shape-message"></div>
-
-    <div class="gallery">
-        <img src="jpg1.jpg">
-        <img src="jpg2.jpg">
-        <img src="jpg3.jpg">
-    </div>
-
-    <div class="cards">
-        <div class="card">
-            <img src="5.jpg">
-            <p>تاريخ ميلاد القمر 4/11/2002🌕✨</p>
-        </div>
-
-        <div class="card">
-            <img src="6.png">
-            <p>أكتر حاجة بتحبها توتا بابا حبيبها🫂♥️</p>
-        </div>
-
-        <div class="card">
-            <img src="jpg1.jpg">
-            <p>أجمل صورة ليكي 🌹❤️</p>
-        </div>
-    </div>
-
-    <audio id="song">
-        <source src="leo.mp3" type="audio/mpeg">
-    </audio>
-</div>
-
-<script>
-// الرسائل عند الضغط على الأشكال
-function showMessage(msg){
-    let box=document.getElementById("shape-message");
-    box.textContent=msg;
-    box.style.opacity=1;
-    box.style.pointerEvents='auto';
-    box.style.transform='translateX(-50%) scale(1.1)';
-    setTimeout(()=>{
-        box.style.opacity=0;
-        box.style.pointerEvents='none';
-        box.style.transform='translateX(-50%) scale(1)';
-    },3000);
-}
-
-// Animation الصور والبطاقات
-function animateCards(){
-    let imgs=document.querySelectorAll(".gallery img");
-    imgs.forEach((img,i)=>{
-        setTimeout(()=>{
-            img.style.opacity=1;
-            img.style.transform='scale(1)';
-        }, i*600);
-    });
-
-    let cards=document.querySelectorAll(".card");
-    cards.forEach((card,i)=>{
-        setTimeout(()=>{
-            card.style.opacity=1;
-            card.style.transform='translateY(0) scale(1)';
-        }, imgs.length*600 + i*600);
-    });
-}
-
-// تحقق تاريخ الميلاد
-function checkPassword(){
-    var day=document.getElementById("day").value;
-    var month=document.getElementById("month").value;
-    var year=document.getElementById("year").value;
-    var error=document.getElementById("error-msg");
-
-    if(day=="4" && month=="11" && year=="2002"){
-        document.getElementById("login").style.display="none";
-
-        let temp=document.createElement("div");
-        temp.innerHTML="♥️شطورة حبيبة بابا♥️";
-        temp.style.fontSize="30px";
-        temp.style.color="#ff0066";
-        temp.style.marginTop="50px";
-        temp.style.opacity="0";
-        temp.style.transition="opacity 0.5s";
-        document.body.appendChild(temp);
-
-        setTimeout(()=>{ temp.style.opacity=1; },100);
-
-        setTimeout(()=>{
-            temp.style.opacity=0;
-            setTimeout(()=>{
-                temp.remove();
-                document.getElementById("content").style.display="block";
-                document.getElementById("song").play();
-                
-                // النص الرئيسي بالعامية
-                let mainText = `
-إنتي كل حياتي، وبدونك ما ليش أي معنى 💖🌙✨
-كل لحظة معاكِ أحلى من ألف لحظة 💕🫂
-قلبي كله ملكك، وعيوني ما تشوف غيرك ♥️🌸
-إنتي سبب ضحكتي وسعادتي طول الوقت 🌹💖
-بحبك أكتر من أي كلام، وكل يوم بحبك أكتر ♥️✨
-معاكِ الدنيا أجمل وألوانها أزهى 🌈🫂
-كل ثانية معاكِ كنز ما يتعوضش 💕💫
-وجودك جنبي بيهون عليّ كل التعب 😘🫂
-ضحكتك بتنور أيامي وبتخلي قلبي يطير 🥰🌸
-كل لحظة معاكِ بحس إني عايش في حلم جميل 🌙💖
-إنتي نصفي التاني، وبدونك أنا ناقص ♥️✨
-إنتي نبض قلبي وكل لحظة بفكر فيك 💓🌙
-وجودك جنبي بيخليني حاسس بالأمان والسعادة 🫂✨
-كل كلمة منك بتلمس قلبي وبتخليني أبتسم ❤️🌸
-إنتي الأمل اللي مالي حياتي نور وحب 💖🌹
-ضحكتك سحري الخاص اللي بيخلي روحي تطير 🥰🌈
-حتى صمتك معايا أحلى من أي كلام 💞🫂
-كل يوم معاكِ هو عيد وما فيش أجمل من لحظتك 🌕💖
-إنتي سر سعادتي وكل أحلامي 💘✨
-معاكِ الدنيا كلها أحلى، حتى الأيام الصعبة 🌹💫
-بحبك أكتر من أي وقت فات، وأكتر من أي كلمة ❤️🌸
-`;
-                let mainTextEl = document.getElementById("main-text");
-                mainTextEl.textContent = mainText;
-                mainTextEl.style.display = "block";
-
-                animateCards();
-            },500);
-        },2000);
-
-    }else{
-        error.innerHTML="الرقم غلط يا بقرة 🤌😂";
-        error.style.display="block";
-    }
-}
-</script>
-
-</body>
-</html>
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
+    inset:0;
     z-index:-2;
     background-image:url('A_seamless_digital_digital_illustration_background.png');
     background-repeat:repeat;
     background-size:40px;
 }
 
-/* القلوب المتوهجة المتحركة */
+/* القلوب المتحركة */
 .heart{
-    position: fixed;
+    position:fixed;
     pointer-events:none;
-    animation: floatUp linear infinite;
-    transform-origin:center;
+    animation:floatUp linear infinite;
     z-index:-1;
 }
 @keyframes floatUp{
-    0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
-    50%{transform:translateY(50vh) translateX(15px) rotate(180deg);}
-    100%{transform:translateY(-50vh) translateX(-10px) rotate(360deg);}
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-50vh);}
 }
 
 /* النص الرئيسي */
-#main-text{
-    font-size:28px;
-    color:#ff0066;
-    margin-top:50px;
-    font-weight:bold;
+#mainText{
     display:none;
+    font-size:26px;
+    color:#ff0066;
+    margin:30px 20px;
+    white-space:pre-line;
+    font-weight:bold;
 }
 
-/* خانات الباسوورد */
-.password-container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    margin-top:30px;
+/* الباسوورد */
+#login{
+    margin-top:80px;
 }
-.password-container input{
-    width:180px;
-    padding:18px;
-    font-size:24px;
-    border-radius:20px;
-    border:2px solid #ff8fc0;
-    box-shadow: 0 4px 15px rgba(255,0,102,0.3);
+input{
+    padding:15px;
+    margin:8px;
+    font-size:20px;
+    width:140px;
+    border-radius:10px;
+    border:2px solid #ff66aa;
     text-align:center;
 }
-.password-container button{
-    padding:18px 30px;
-    font-size:22px;
-    border-radius:20px;
+button{
+    padding:12px 25px;
+    font-size:20px;
     border:none;
-    background:linear-gradient(45deg,#ff3399,#ff66b2);
-    color:white;
-    box-shadow:0 4px 10px rgba(255,0,102,0.5);
-    cursor:pointer;
-    transition:0.3s;
-}
-.password-container button:hover{
-    transform: scale(1.05);
-}
-#error-msg{
-    color:red;
-    margin-top:10px;
-    display:none;
+    border-radius:10px;
+    background:#ff3399;
+    color:#fff;
 }
 
-/* الأشكال التفاعلية */
-.shape-section{
-    margin-top:40px;
-}
-.shapes-container{
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    padding:10px 0;
-    justify-content:center;
-}
-.shape{
-    font-size:40px;
-    cursor:pointer;
-    transition:0.3s;
-}
-.shape:hover{
-    transform:scale(1.2) rotate(10deg);
-}
-
-/* صور وبطاقات */
-.gallery img{
+/* الصور والكروت */
+.gallery img,.card img{
     width:85%;
     border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    margin-bottom:15px;
-    opacity:0;
-    transform:scale(0.8);
-    transition:1s;
-}
-.cards{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-    margin-top:30px;
+    margin:15px 0;
+    box-shadow:0 0 20px rgba(255,0,102,0.4);
 }
 .card{
-    background:white;
-    border-radius:20px;
+    background:#fff;
+    margin:20px;
     padding:15px;
-    box-shadow:0 0 20px rgba(255,0,102,0.4);
-    opacity:0;
-    transform: translateY(30px) scale(0.9);
-    transition:1s;
-}
-.card img{
-    width:100%;
-    border-radius:15px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,0,102,0.3);
 }
 .card p{
-    margin-top:10px;
-    font-size:20px;
     color:#ff0066;
     font-weight:bold;
-}
-
-/* رسالة الأشكال */
-#shape-message{
-    position:fixed;
-    top:30%;
-    left:50%;
-    transform:translateX(-50%);
-    background:white;
-    padding:15px 25px;
-    border-radius:20px;
-    box-shadow:0 0 20px rgba(255,0,102,0.5);
-    font-size:18px;
-    color:#ff0066;
-    opacity:0;
-    pointer-events:none;
-    transition:0.5s;
 }
 </style>
 </head>
+
 <body>
 
-<script>
-// إنشاء القلوب المتوهجة المتحركة
-let shapes=["❤️","💕","💖","✨","🌸","🫂","🌹"];
-let colors=["#ff6699","#ff3399","#ff99cc","#ffccff","#ffb3d9"];
-for(let i=0;i<100;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(5+Math.random()*10)+"px";
-    heart.style.color=colors[Math.floor(Math.random()*colors.length)];
-    heart.style.animationDuration=(4+Math.random()*5)+"s";
-    heart.style.opacity=Math.random()*0.8+0.3;
-    heart.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];
-    document.body.appendChild(heart);
-}
-</script>
-
-<!-- النص الرئيسي -->
-<div id="main-text"></div>
-
-<!-- صفحة الباسوورد -->
-<div class="container" id="login">
-    <h2 style="font-size:26px; margin-bottom:15px;">Tota&Moka Forever 🔐♥️🫂</h2>
-    <h2>ادخلي تاريخ ميلادك ❤️</h2>
-    <div class="password-container">
-        <input type="number" id="day" placeholder="اليوم">
-        <input type="number" id="month" placeholder="الشهر">
-        <input type="number" id="year" placeholder="السنة">
-        <button onclick="checkPassword()">افتحي</button>
-    </div>
-    <p id="error-msg"></p>
+<div id="login">
+    <h2>Tota&Moka Forever ❤️</h2>
+    <h3>ادخلي تاريخ ميلادك</h3>
+    <input id="day" placeholder="اليوم">
+    <input id="month" placeholder="الشهر">
+    <input id="year" placeholder="السنة"><br>
+    <button onclick="check()">افتحي</button>
+    <p id="err" style="color:red;"></p>
 </div>
 
-<!-- المحتوى -->
-<div class="container" id="content" style="display:none;">
-    <div id="extra-messages" style="margin-top:20px;"></div>
+<div id="mainText"></div>
 
-    <!-- الأشكال التفاعلية -->
-    <div class="shape-section">
-        <p style="font-size:20px; color:#ff0066; margin-bottom:10px;">
-            أضغطي بصوابعك الحلوين دول عالاشكال دى ♥️👇
-        </p>
-        <div class="shapes-container">
-            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">💖</div>
-            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🌸</div>
-            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">✨</div>
-            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🌈</div>
-        </div>
-    </div>
-
-    <div id="shape-message"></div>
-
+<div id="content" style="display:none;">
     <div class="gallery">
         <img src="jpg1.jpg">
         <img src="jpg2.jpg">
         <img src="jpg3.jpg">
     </div>
 
-    <div class="cards">
-        <div class="card">
-            <img src="5.jpg">
-            <p>تاريخ ميلاد القمر 4/11/2002🌕✨</p>
-        </div>
-        <div class="card">
-            <img src="6.png">
-            <p>أكتر حاجة بتحبها توتا بابا حبيبها🫂♥️</p>
-        </div>
-        <div class="card">
-            <img src="jpg1.jpg">
-            <p>أجمل صورة ليكي 🌹❤️</p>
-        </div>
+    <div class="card">
+        <img src="5.jpg">
+        <p>تاريخ ميلاد القمر 4/11/2002</p>
+    </div>
+
+    <div class="card">
+        <img src="6.png">
+        <p>أكتر حاجة بتحبها توتا</p>
     </div>
 
     <audio id="song">
@@ -595,80 +127,46 @@ for(let i=0;i<100;i++){
 </div>
 
 <script>
-// الرسائل عند الضغط على الأشكال
-function showMessage(msg){
-    let box=document.getElementById("shape-message");
-    box.textContent=msg;
-    box.style.opacity=1;
-    box.style.pointerEvents='auto';
-    box.style.transform='translateX(-50%) scale(1.1)';
-    setTimeout(()=>{
-        box.style.opacity=0;
-        box.style.pointerEvents='none';
-        box.style.transform='translateX(-50%) scale(1)';
-    },3000);
+// قلوب متحركة
+for(let i=0;i<120;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(10+Math.random()*10)+"px";
+    h.style.animationDuration=(5+Math.random()*5)+"s";
+    h.innerHTML="❤️";
+    document.body.appendChild(h);
 }
 
-// Animation الصور والبطاقات
-function animateCards(){
-    let imgs=document.querySelectorAll(".gallery img");
-    imgs.forEach((img,i)=>{
-        setTimeout(()=>{
-            img.style.opacity=1;
-            img.style.transform='scale(1)';
-        }, i*600);
-    });
-    let cards=document.querySelectorAll(".card");
-    cards.forEach((card,i)=>{
-        setTimeout(()=>{
-            card.style.opacity=1;
-            card.style.transform='translateY(0) scale(1)';
-        }, imgs.length*600 + i*600);
-    });
-}
+// التحقق
+function check(){
+    if(day.value=="4" && month.value=="11" && year.value=="2002"){
+        login.style.display="none";
 
-// تحقق تاريخ الميلاد
-function checkPassword(){
-    var day=document.getElementById("day").value;
-    var month=document.getElementById("month").value;
-    var year=document.getElementById("year").value;
-    var error=document.getElementById("error-msg");
-
-    if(day=="4" && month=="11" && year=="2002"){
-        document.getElementById("login").style.display="none";
-
-        // اظهار الجملة مؤقتاً
-        let temp=document.createElement("div");
-        temp.innerHTML="♥️شطورة حبيبة بابا♥️";
-        temp.style.fontSize="30px";
-        temp.style.color="#ff0066";
-        temp.style.marginTop="50px";
-        temp.style.opacity="0";
-        temp.style.transition="opacity 0.5s";
-        document.body.appendChild(temp);
-        setTimeout(()=>{ temp.style.opacity=1; },100);
+        let msg=document.createElement("h2");
+        msg.innerHTML="♥️شطورة حبيبة بابا♥️";
+        document.body.appendChild(msg);
 
         setTimeout(()=>{
-            temp.style.opacity=0;
-            setTimeout(()=>{
-                temp.remove();
-                // اظهار المحتوى
-                document.getElementById("content").style.display="block";
-                document.getElementById("song").play();
+            msg.remove();
 
-                // اظهار النص الرئيسي
-                let mainText = "أنتِ كل حياتي، وبدونك ما ليش معنى 💖🌙✨\nكل لحظة معاكِ أحلى من ألف لحظة 💕🫂\nقلبي ملكك وحدك، وعيوني ما تشوف غيرك ♥️🌸";
-                let mainTextEl = document.getElementById("main-text");
-                mainTextEl.textContent = mainText;
-                mainTextEl.style.display = "block";
+            mainText.style.display="block";
+            mainText.textContent=`
+إنتي كل حياتي وبدونك مليش أي معنى
+ضحكتك بتنور أيامي وبتخليني مبسوط دايمًا
+بحبك أكتر من أي كلام وأكتر من أي حاجة
+وجودك جنبي أمان وراحة لقلبي
+معاك الدنيا بقت أجمل بكتير
+كل لحظة معاكي عندي بالدنيا
+إنتي نصي التاني وحياتي كلها
+`;
 
-                animateCards();
-            },500);
+            content.style.display="block";
+            song.play();
+
         },2000);
-
-    } else {
-        error.innerHTML="الرقم غلط يا بقرة 🤌😂";
-        error.style.display="block";
+    }else{
+        err.innerText="الرقم غلط 😅";
     }
 }
 </script>
