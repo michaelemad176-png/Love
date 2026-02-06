@@ -14,7 +14,7 @@ body{
     position: relative;
 }
 
-/* الخلفية */
+/* الخلفية الثابتة بأيقونات الحب */
 body::before{
     content:"";
     position:fixed;
@@ -23,12 +23,12 @@ body::before{
     width:100%;
     height:100%;
     z-index:-2;
-    background-image:url('background-pattern.png');
+    background-image:url('background-pattern.png'); /* ضع صورة الخلفية هنا */
     background-repeat:repeat;
     background-size:50px;
 }
 
-/* القلوب المتوهجة */
+/* القلوب المتوهجة المتحركة */
 .heart{
     position: fixed;
     pointer-events:none;
@@ -36,6 +36,7 @@ body::before{
     transform-origin:center;
     z-index:-1;
 }
+
 @keyframes floatUp{
     0%{transform:translateY(100vh) translateX(0) rotate(0deg);}
     50%{transform:translateY(50vh) translateX(15px) rotate(180deg);}
@@ -90,34 +91,34 @@ body::before{
     display:none;
 }
 
-/* النص الرئيسي */
+/* النص الرئيسي بعد الباسوورد */
 #main-text{
-    color:#000;
     font-size:22px;
-    line-height:1.8;
-    margin:30px 15px;
+    color:#000000;
     font-weight:bold;
-    text-align:center;
+    line-height:1.7;
+    margin-top:30px;
 }
 
-/* الأشكال التفاعلية */
+/* الأشكال التفاعلية (هدايا) */
 .shape-section{
     margin-top:40px;
 }
 .shapes-container{
     display:flex;
     flex-direction:column;
+    gap:15px;
+    padding:10px 0;
+    justify-content:center;
     align-items:center;
-    gap:25px;
-    margin:20px 0;
 }
 .shape{
-    font-size:70px;
+    font-size:60px;
     cursor:pointer;
     transition:0.3s;
 }
 .shape:hover{
-    transform:scale(1.2) rotate(5deg);
+    transform:scale(1.2) rotate(10deg);
 }
 #shape-message{
     position:fixed;
@@ -174,6 +175,7 @@ body::before{
 </head>
 <body>
 
+<!-- القلوب المتوهجة -->
 <script>
 let shapes=["❤️","💕","💖","✨","🌸","🫂","🌹"];
 let colors=["#ff6699","#ff3399","#ff99cc","#ffccff","#ffb3d9"];
@@ -206,7 +208,7 @@ for(let i=0;i<50;i++){
 <!-- المحتوى بعد الباسوورد -->
 <div class="container" id="content" style="display:none;">
 
-    <!-- النص الرئيسي بعد الباسوورد -->
+    <!-- النص الموحد بعد الباسوورد -->
     <div id="main-text">
         إنتي كل حياتي، وبدونك ما ليش أي معنى 💖🌙✨<br>
         كل لحظة معاكِ أحلى من ألف لحظة 💕🫂<br>
@@ -233,12 +235,12 @@ for(let i=0;i<50;i++){
 
     <!-- الأشكال التفاعلية -->
     <div class="shape-section">
-        <p>أضغطي بصوابعك الحلوين دول عالاشكال دى ♥️👇</p>
+        <p>أضغطي على الهدايا دول ♥️👇</p>
         <div class="shapes-container">
-            <div class="shape" onclick="showMessage('رسالة 1: أنتِ أحلى واحدة! 🥰')">🎁</div>
-            <div class="shape" onclick="showMessage('رسالة 2: قلبي كله ملكك ❤️')">🎁</div>
-            <div class="shape" onclick="showMessage('رسالة 3: أحبك فوق ما تتخيلي 🫂')">🎁</div>
-            <div class="shape" onclick="showMessage('رسالة 4: كل يوم معاكِ أحلى 💕')">🎁</div>
+            <div class="shape">🎁</div>
+            <div class="shape">🎁</div>
+            <div class="shape">🎁</div>
+            <div class="shape">🎁</div>
         </div>
     </div>
 
@@ -268,26 +270,12 @@ for(let i=0;i<50;i++){
     </div>
 
     <!-- الموسيقى -->
-    <audio id="song" autoplay>
+    <audio id="song">
         <source src="leo.mp3" type="audio/mpeg">
     </audio>
 </div>
 
 <script>
-// الأشكال التفاعلية
-function showMessage(msg){
-    let box=document.getElementById("shape-message");
-    box.textContent=msg;
-    box.style.opacity=1;
-    box.style.pointerEvents='auto';
-    box.style.transform='translateX(-50%) scale(1.1)';
-    setTimeout(()=>{
-        box.style.opacity=0;
-        box.style.pointerEvents='none';
-        box.style.transform='translateX(-50%) scale(1)';
-    },3000);
-}
-
 // Animation الصور والبطاقات
 function animateCards(){
     let imgs=document.querySelectorAll(".gallery img");
@@ -324,17 +312,17 @@ function checkPassword(){
         temp.style.opacity="0";
         temp.style.transition="opacity 0.5s";
         document.body.appendChild(temp);
+
         setTimeout(()=>{ temp.style.opacity=1; },100);
         setTimeout(()=>{
             temp.style.opacity=0;
             setTimeout(()=>{
                 temp.remove();
                 document.getElementById("content").style.display="block";
-                document.getElementById("song").play();
+                document.getElementById("song").play(); // الأغنية تشتغل هنا
                 animateCards();
             },500);
         },2000);
-
     }else{
         error.innerHTML="الرقم غلط يا بقرة 🤌😂";
         error.style.display="block";
